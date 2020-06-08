@@ -1,0 +1,43 @@
+{	
+"no_offset": {
+	"offset": {"x": 0, "y": 0, "method": "cardinal_only"},
+	"max_accommodation": 410,
+	"buffer_ratio": "1:0",
+	"order": 5
+	},
+"offset_1": {
+	"offset": {"x": 2, "y": 1, "method": "full_block"},
+	"max_accommodation": 83,
+	"buffer_ratio": "1:4.029",
+	"max_buffer_ratio": "1:7.0",
+	"order": 0
+	},
+"offset_2": {
+	"offset": {"x": 2, "y": 1, "method": "shaved_corners"},
+	"max_accommodation": 123,
+	"buffer_ratio": "1:2.366",
+	"max_buffer_ratio": "1:4.0",
+	"order": 1
+	},
+"offset_3": {
+	"offset": {"x": 1, "y": 1, "method": "full_block"},
+	"max_accommodation": 125,
+	"buffer_ratio": "1:2.314",
+	"max_buffer_ratio": "1:4.0",
+	"order": 2
+	},
+"offset_4": {
+	"offset": {"x": 1, "y": 1, "method": "cardinal_only"},
+	"max_accommodation": 185,
+	"buffer_ratio": "1:1.226",
+	"max_buffer_ratio": "1:2.0",
+	"order": 3
+	},
+"offset_5": {
+	"offset": {"x": 1, "y": 0, "method": "cardinal_only"},
+	"max_accommodation": 245,
+	"buffer_ratio": "1:0.677",
+	"max_buffer_ratio": "1:1.0",
+	"order": 4
+	}
+}

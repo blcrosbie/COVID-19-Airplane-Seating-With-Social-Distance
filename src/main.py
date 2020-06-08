@@ -19,10 +19,8 @@
 # 3b. Repeat until all groups size > 1 seated (make sure seat states are always updated back to 'P' before
 #      Moving on to next group)
 
-
 import os, sys
-
-
+import json
 
 from randomize import create_passenger_roster
 
@@ -119,15 +117,20 @@ def initialize_offsets(default_offset, debug=False):
 
 def analyze_offsets(airplane, sd_offset_list, default_offset, view_charts=False, debug=False):
 
-    if debug:
-        # order priority for offsets
-        default_order_on_attr = 'max_accommodation'
-
+    if os.path.exists('offset.json'):
+        with open('offset.json', 'r') as fp:
+            offsets_analyzed_dict = json.load(fp)
+        
     else:
-        # another user prompt to ask for Order Prirority
-        pass
-    
-    offsets_analyzed_dict =  AnalyzeSocialDistance(airplane, sd_offset_list, default_offset, default_order_on_attr, view_charts=view_charts)
+        if debug:
+            # order priority for offsets
+            default_order_on_attr = 'max_accommodation'
+        else:
+            # another user prompt to ask for Order Prirority
+            pass
+        
+        offsets_analyzed_dict =  AnalyzeSocialDistance(airplane, sd_offset_list, default_offset, default_order_on_attr, view_charts=view_charts)
+            
     
     return offsets_analyzed_dict
 

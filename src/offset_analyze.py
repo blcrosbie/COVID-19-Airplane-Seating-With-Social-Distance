@@ -39,7 +39,7 @@ def calculate_max_accommodation(airplane, offsets, view_charts):
                 
         
         update_key = 'offset_' + str(i)
-        max_accommodation.update({update_key: assign_success})
+        max_accommodation.update({update_key: int(assign_success)})
         
         # to visualize the plane with seated passengers
         if view_charts:
@@ -277,8 +277,10 @@ def AnalyzeSocialDistance(airplane, offsets, no_offset, order_on, view_charts=Fa
         offkey = 'offset_' + str(i)   
         max_buffer_key = 'max_buffer_' + offkey
         
+        max_acc = int(max_accommodation[offkey])
+        
         offsets_analyzed.update({offkey: {'offset': offsets[i],
-                                          'max_accommodation': max_accommodation[offkey],
+                                          'max_accommodation': max_acc,
                                           'buffer_ratio': buffer_ratios[offkey],
                                           'max_buffer_ratio': buffer_ratios[max_buffer_key]
                                           }})
