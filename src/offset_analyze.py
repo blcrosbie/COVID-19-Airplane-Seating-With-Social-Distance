@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import pandas as pd
-import matplotlib as plt
+import matplotlib.pyplot as plt
 
 from assign_seats import SeatPassenger
 from block_seats import SocialDistance
@@ -17,29 +17,37 @@ def calculate_max_accommodation(airplane, offsets, view_charts):
         dont_try_hard = airplane.total_seats
         assign_success = 0
         
-        while dont_try_hard >= 0 and airplane.next_seat is not None:
+        if view_charts:
+            print("Calculating Max Accommodation for Offset: {}".format(sd_offset))
+        
+        
+        while dont_try_hard > 0 and airplane.next_seat is not None:
             dont_try_hard -= 1
             
-            pre_assigned_seat = airplane.last_assigned_seat
+            before_assignment = airplane.next_seat
             blocked_list = SocialDistance(airplane, sd_offset)
-            print(blocked_list)
             SeatPassenger(airplane, blocked_list)
-            
-            if pre_assigned_seat != airplane.last_assigned_seat:
-                assign_success += 1
-                
             find_next_seat(airplane)
+            
+            if airplane.next_seat != before_assignment:
+                assign_success += 1 
+                
+            else:
+                # print(dont_try_hard)
+                airplane.next_seat = None
+                
+                
         
         update_key = 'offset_' + str(i)
         max_accommodation.update({update_key: assign_success})
         
         # to visualize the plane with seated passengers
         if view_charts:
-            print("Social Distance Offset: {}".format(sd_offset))
-            print("Total Seats: {}".format(airplane.total_seats))
-            print("Capacity: {}%".format(round(100*assign_success/airplane.total_seats,1)))
-            print("Passengers Accommodated: {}".format(assign_success))
-            print("Buffer Seats: {}\n".format(airplane.total_seats - assign_success))           
+            print("Max Accommodation Results: {}".format(sd_offset))
+            print("\tTotal Seats: {}".format(airplane.total_seats))
+            print("\tCapacity: {}%".format(round(100*assign_success/airplane.total_seats,1)))
+            print("\tPassengers Accommodated: {}".format(assign_success))
+            print("\tBuffer Seats: {}\n".format(airplane.total_seats - assign_success))           
             
             airplane.view_plane(pretty=True, details=False)
             print("\n")
@@ -50,6 +58,15 @@ def calculate_max_accommodation(airplane, offsets, view_charts):
     return max_accommodation
         
                 
+
+def get_buffer_ratio(no_offset_count, offset_count, buffer_count):
+    fraction = offset_count / (offset_count + buffer_count)
+    inverse = 1/fraction
+    ratio_to_1 = inverse - 1
+    ratio = round(ratio_to_1, 3)
+    
+    return ratio
+
 
 
 def calculate_buffer_ratio(airplane, offsets, offset_max_seats, view_charts):
@@ -79,21 +96,26 @@ def calculate_buffer_ratio(airplane, offsets, offset_max_seats, view_charts):
         save_info.update({'accommodated_passengers': 0, 'seats_reserved_for_SD':0})
 
         # need to run another for loop to build the factor based on capacity of plane
-        for s in range(offset_max_count, total_seats+1):
-            factor = s/airplane.total_seats
-            seat_count = int(factor*offset_max_count)
+        for s in range(0, total_seats+1):
 
-            # two variable problem still
-            residual_factor = 1-factor
-            no_offset_seats = int(total_seats*residual_factor)
-
-            accommodated_passengers = seat_count + no_offset_seats
+            if s <= offset_max_count:
+                seats_with_offset = offset_max_count
+                no_offset_seats = 0
+        
+            else:
+                factor = 1 - ((s-offset_max_count)/(total_seats-offset_max_count))
+                seats_with_offset = int(factor*offset_max_count)
+                no_offset_seats = s - seats_with_offset 
+                
+            buffer_count = total_seats - seats_with_offset - no_offset_seats
+            accommodated_passengers = seats_with_offset + no_offset_seats
 
             # update info for the factor and passenger count on current "offset_i"
-            save_info.update({update_key: seat_count})
+            save_info.update({update_key: seats_with_offset})
             save_info.update({'no_offset': no_offset_seats})
             save_info.update({'accommodated_passengers': accommodated_passengers})
-            save_info.update({'seats_reserved_for_SD': (total_seats - accommodated_passengers)})
+            save_info.update({'seats_reserved_for_SD': buffer_count})
+            save_info.update({'capacity': round(100*s/total_seats, 2)})
 
 
             for j in range(1, len(offsets)):
@@ -115,38 +137,60 @@ def calculate_buffer_ratio(airplane, offsets, offset_max_seats, view_charts):
 
             
     buffer_dict = {}
+    if view_charts:
+        capacity_dict = {}
     
     # find offset ratio for buffer seats
     for i in range(1, len(offsets)):
         o_key = 'offset_' + str(i)
+        # observe_df = options_df[options_df[o_key] <= options_df['accommodated_passengers']]
+        # observe_df = observe_df[observe_df[o_key] > 0]
 
-        observe_df = options_df[options_df[o_key] < options_df['accommodated_passengers']]
-        observe_df = observe_df[observe_df[o_key] > 0]
+        observe_df = options_df[options_df[o_key] > 0]
+        observe_df = observe_df.sort_values(['capacity'], ascending=True)
         chart_df = observe_df.reset_index(drop=True)
-
-
-        for j in range(1, len(offsets)):
-            shift_ndx = (i+j)%len(offsets)
-            if shift_ndx != 0:
-                drop_key = 'offset_' + str((i+j)%len(offsets))
-                chart_df = chart_df.drop([drop_key], axis=1)
-
-        # need to set to true, default is false
+         
+        this_buffer = 'buffer_' + str(i)
+        # Buffer calculations
+        chart_df[this_buffer] = chart_df[['no_offset', o_key, 'seats_reserved_for_SD']].apply(lambda x: get_buffer_ratio(*x), axis=1)
+                 
+        # slope_my_offset = round((max(chart_df[o_key]) - min(chart_df[o_key]))/len(chart_df), 3)
+        # slope_reserve = round((max(chart_df['seats_reserved_for_SD']) - min(chart_df['seats_reserved_for_SD']))/len(chart_df),3)  
+        
+        # offset_seats = offset_max_count - 1
+        # reserve = chart_df[chart_df[o_key] == offset_seats]
+        # print(reserve)
+        
+        # offset2buffer_ratio = round(slope_reserve/slope_my_offset,3)
+        offset2buffer_ratio = max(chart_df[this_buffer])
+        max_buffer = max(chart_df[this_buffer])
+        # min_buffer = min(chart_df[this_buffer])
+        avg_buffer = round(chart_df[this_buffer].mean(),3)
+        
+        max_buffer_ratio = '1:' + str(max_buffer) 
+        buffer_ratio = '1:' +str(avg_buffer)
+        max_buffer_key = 'max_buffer_' + o_key
+        buffer_dict[o_key] = buffer_ratio
+        buffer_dict[max_buffer_key] = max_buffer_ratio
+        
         if view_charts:
-            chart_df.plot.line()
-            plt.xlabel("Sum Accommodated Passengers + Seats Reserved for SD for Total Seats")
-            plt.ylabel("Sum {} and no offset seats for Total Seats".format(o_key))
-            plt.title("{}".format(o_key))
-
+            x = list(chart_df['capacity'])
+            y = list(chart_df[o_key])
+            capacity_dict.update({o_key: {'capacity': x, 'accommodation_count': y}})  
+        
+        
+    if view_charts:
+        for i in range(1, len(offsets)):
+            o_key = 'offset_' + str(i)
+            x = capacity_dict[o_key]['capacity']
+            y = capacity_dict[o_key]['accommodation_count']            
+            plt.plot(x, y, label=o_key)
             
-        slope_my_offset = round((max(chart_df[o_key]) - min(chart_df[o_key]))/len(chart_df), 3)
-        slope_reserve = round((max(chart_df['seats_reserved_for_SD']) - min(chart_df['seats_reserved_for_SD']))/len(chart_df),3)
+        plt.xlabel("Airplane capactity %")
+        plt.ylabel("Accommodated passengers with Social Distancing")
+        plt.legend(capacity_dict.keys())
+        plt.title("Accommodation per Capacity")
         
-        offset2buffer_ratio = round(slope_reserve/slope_my_offset,3)
-        
-        off2br = '1:' + str(offset2buffer_ratio) 
-        
-        buffer_dict.update({o_key:off2br})
     
     return buffer_dict
 
@@ -230,10 +274,14 @@ def AnalyzeSocialDistance(airplane, offsets, no_offset, order_on, view_charts=Fa
        
     # combine details into analyzed dictionary 
     for i in range(1, len(offsets)):
-        offkey = 'offset_' + str(i)    
+        offkey = 'offset_' + str(i)   
+        max_buffer_key = 'max_buffer_' + offkey
+        
         offsets_analyzed.update({offkey: {'offset': offsets[i],
                                           'max_accommodation': max_accommodation[offkey],
-                                          'buffer_ratio': buffer_ratios[offkey]}})
+                                          'buffer_ratio': buffer_ratios[offkey],
+                                          'max_buffer_ratio': buffer_ratios[max_buffer_key]
+                                          }})
     
     # Add an order detail to offsets
     if order_on == 'max_accommodation':

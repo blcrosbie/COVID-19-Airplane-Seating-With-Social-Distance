@@ -43,10 +43,8 @@ from block_seats import SocialDistance
 
 
 
-
-
 ##############################################################################################################
-# STEP 1: GET AIRPLANE AND LIST OF PASSENGERS
+# STEP 1: GET AIRPLANE
 
 def initialize_airplane(debug=False, capacity=0.0, option=0):
     
@@ -85,24 +83,17 @@ def initialize_airplane(debug=False, capacity=0.0, option=0):
         
     
     return plane
-        
-        
-        
     
-def initialize_passengers(debug=False, passengers_booked=0):
+
+##############################################################################################################
+# STEP 2: OFFSET ANALYSIS FOR SPECIFIC CASE
+
+def initialize_offsets(default_offset, debug=False):
+    # global default offset for no social distancing
+
     
-    if debug:    
-        df = create_passenger_roster(passengers_booked, view_stats=False)
-    else:
-        # import csv with passengers
-        pass
-    
-    return df
-
-
-
-def initialize_offsets(no_offset, debug=False):
     if debug:
+        no_offset = default_offset
         # Default Offset declared in globals as x: 0 y: 0, the conventional seating method
         # THIS COULD BE REDEFINED TO ALLOW CUSTOMIZATION: SET BY MAX X and Y from user
         offset_1 = {'x': 2, 'y': 1, 'method': 'full_block'}
@@ -115,27 +106,46 @@ def initialize_offsets(no_offset, debug=False):
         
         
     else:
-        # ask user for MAX value X, Y
-        # iterate through decrement from max to 0, cycle through full-block, shaved-corners, cardinal-only
-        # once Y=0 and X=1 and cardinal only, finish list
-        sd_offsets = []
+        ## ask user for MAX value X, Y
+        ## iterate through decrement from max to 0, cycle through full-block, shaved-corners, cardinal-only
+        ## once Y=0 and X=1 and cardinal only, finish list
+        # no_default = set_default_offset
+        # sd_offsets = [no_offset]
         pass
     
 
     return sd_offsets
     
-        
+
+def analyze_offsets(airplane, sd_offset_list, default_offset, view_charts=False, debug=False):
+
+    if debug:
+        # order priority for offsets
+        default_order_on_attr = 'max_accommodation'
+
+    else:
+        # another user prompt to ask for Order Prirority
+        pass
     
-
-##############################################################################################################
-# STEP 2: OFFSET ANALYSIS FOR SPECIFIC CASE
-
-
+    offsets_analyzed_dict =  AnalyzeSocialDistance(airplane, sd_offset_list, default_offset, default_order_on_attr, view_charts=view_charts)
+    
+    return offsets_analyzed_dict
 
 
 
 ##############################################################################################################
-# STEP 3: 
+# STEP 3: INPUT PASSENGERS: USER UPLOAD CSV OR RANDOMIZE FOR TESTING
+    
+def initialize_passengers(debug=False, passengers_booked=0):
+    
+    if debug:    
+        df = create_passenger_roster(passengers_booked, view_stats=False)
+    else:
+        # import csv with passengers
+        pass
+    
+    return df
+
 
 ###################################################################################################
         
@@ -279,7 +289,6 @@ default_offset = {'x': 0, 'y': 0, 'method': 'cardinal_only'}
 offset_info = {}
 
 
-
 # TEST vs. PROD
 
 # if in test mode, use 1 of the 3 airplan models
@@ -298,20 +307,18 @@ if __name__ == '__main__':
     age_threshold = 50
     test_option = 2
     
-    # 1. USER INPUTS or RANDOMIZED
-    # 1a. BUILD PLANE
+    # 1. BUILD PLANE
     my_plane = initialize_airplane(debug=DEBUG, capacity=test_capacity, option=test_option)
-        
-    # 1b. RANDOM PASSENGERS
-    passengers_df = initialize_passengers(debug=DEBUG, passengers_booked=my_plane.booked_seats)
     
-    # 1c. set the spacing offsets
+    # 2a. set the spacing offsets
     my_sd_offsets = initialize_offsets(default_offset, debug=DEBUG)
         
-    # 2. ANALYZE OFFSET FOR THIS CASE PROBLEM
-    # order priority for offsets ( AGAIN COULD BE USER DEFINED RADIO BUTTON MAX ACCOMMODATION OR other attribute)
-    my_order_on_attr = 'max_accommodation'
-    offset_info =  AnalyzeSocialDistance(my_plane, my_sd_offsets, default_offset, my_order_on_attr)
+    # 2b. ANALYZE OFFSET FOR THIS CASE PROBLEM
+    my_offset_info = analyze_offsets(my_plane, my_sd_offsets, default_offset, debug=DEBUG)
+    
+    # 3. RANDOM PASSENGERS
+    #passengers_df = initialize_passengers(debug=DEBUG, passengers_booked=my_plane.booked_seats)
+
     
     # 3. Start Seating Group Passengers
     

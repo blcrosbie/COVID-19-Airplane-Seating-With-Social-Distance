@@ -190,40 +190,53 @@ def SeatPassenger(airplane, blocked_seat_list=[], occupied_state='P'):
 
     if blocked_seat_list == []:
         # this is default offset, no blocked seats SocialDistance function
+        print("empty blocked seat list")
         pass
 
-    else:          
+    else:   
+
         # now if there IS a seat_list, fill the seat states in with distance tuples
         for seat_tuple in blocked_seat_list:
             row = int(seat_tuple[0])
             col = seat_tuple[1]
             block_seat = str(row) + col
-
-            distance = seat_distance(airplane, airplane.last_assigned_seat, block_seat)
+            
+            distance = seat_distance(airplane, airplane.next_seat, block_seat)
 
             if airplane.cabin.loc[row, col] == 'P' or airplane.cabin.loc[row, col] == 'G':
                 pass
         
-            elif isinstance(airplane.cabin.loc[row, col], str):
-                print("SHOULD NOT BE STRING UNLESS G or P above")
+            # elif isinstance(airplane.cabin.loc[row, col], str):
+            #     print("SHOULD NOT BE STRING UNLESS G or P above")
                                                 
             # if currently an integer, overwrite
             elif isinstance(airplane.cabin.loc[row, col], int):
                 new_list = list()
-                new_list.append(str(distance))
-                print(new_list)
-                print(type(new_list))
+                new_list.append(distance)
                 airplane.cabin.loc[row, col] = new_list
     
             elif isinstance(airplane.cabin.loc[row, col], list):
                 # this is the case where a distance is already initialized in seat_state
                 xy_list = airplane.cabin.loc[row, col]
-                if str(distance) not in xy_list:
-                    xy_list.append(str(distance))
+                if distance not in xy_list:
+                    xy_list.append(distance)
                     airplane.cabin.loc[row, col] = xy_list
+            
+            # elif isinstance(airplane.cabin.loc[row, col], int):
+            #     new_list = list()
+            #     new_list.append(str(distance))
+            #     airplane.cabin.loc[row, col] = new_list
+    
+            # elif isinstance(airplane.cabin.loc[row, col], list):
+            #     # this is the case where a distance is already initialized in seat_state
+            #     xy_list = airplane.cabin.loc[row, col]
+            #     if str(distance) not in xy_list:
+            #         xy_list.append(str(distance))
+            #         airplane.cabin.loc[row, col] = xy_list
                     
             elif isinstance(airplane.cabin.loc[row, col], str):
                 # this is the case where a distance is already initialized in seat_state
+                print("SHOULD NOT BE HERE")
                 xy_list = []
                 xy_list.append(airplane.cabin.loc[row, col])
                 if str(distance) not in xy_list:
@@ -239,7 +252,7 @@ def SeatPassenger(airplane, blocked_seat_list=[], occupied_state='P'):
     current_row = int(airplane.next_seat[:-1])
     current_col = airplane.next_seat[-1]
     airplane.cabin.loc[current_row, current_col] = occupied_state
-    airplane.last_assigned_seat = airplane.next_seat       
+    airplane.last_assigned_seat = airplane.next_seat 
     
     
     return

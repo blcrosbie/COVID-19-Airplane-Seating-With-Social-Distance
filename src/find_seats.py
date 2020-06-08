@@ -63,8 +63,10 @@ def find_next_seat(airplane, search_for_state=int(0)):
         find_next_seat(airplane, skip_seat_state)
 
     elif check_row < airplane.start_row and search_for_state == skip_seat_state:
-        print("CHECK IF AIRPLANE FULL")
-        airplane.view_plane()
+        # print("CHECK IF AIRPLANE FULL")
+        # print(airplane.next_seat)
+        # print(airplane.last_assigned_seat)
+        return
 
     else:
         print("NOT SURE WHAT HAPPENED HERE")

@@ -309,8 +309,8 @@ def read_block(block_df, seat_list):
     number_of_passengers_in_block = int((block_df == 'P').sum(axis=1).sum(axis=0))
     
     ###### DEBUGGING
-    print(number_of_passengers_in_block)
-    print(block_df)
+    # print(number_of_passengers_in_block)
+    # print(block_df)
     
     return number_of_passengers_in_block
     
@@ -368,7 +368,7 @@ def SocialDistance(airplane, offset, occupied_state='P'):
 #     try:
     blocked_seat_list = create_sd_block_list(airplane, offset)
 
-    print("BLOCKED SEAT IN SD FUNCTION: ", blocked_seat_list)
+    # print("BLOCKED SEAT IN SD FUNCTION: ", blocked_seat_list)
     # now check the blocked seat list to ensure no passengers are encroaching on Social Distance Offset
     check_flag = check_blocked_seats(airplane, blocked_seat_list)
 

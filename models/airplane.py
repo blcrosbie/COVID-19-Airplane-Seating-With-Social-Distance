@@ -53,13 +53,16 @@ class Airplane:
         df_cols = self.seat_letters
         cabin = pd.DataFrame(index=df_rows, columns=df_cols, dtype=object).fillna(0)
         
-        # create columns with ' ' to visualize open aisles
-        for col in cabin.columns:
-            if col == ' ':
-                cabin[col] = aisle
-        
         # assign the initialized pandas dataframe to the Airplane attribute self.cabin
         self.cabin = cabin
+        # create columns with ' ' to visualize open aisles
+        for col in self.cabin.columns:
+            if col == ' ':
+                self.cabin[col] = aisle
+            else:
+                self.cabin[col] = self.cabin[col].astype(object)
+        
+        # User defined
         self.capacity = capacity
         
         # each cell of DataFrame for open seat has a state set to int(0)
@@ -103,6 +106,9 @@ class Airplane:
                 for col in pretty_cabin.columns:
                     if isinstance(pretty_cabin.loc[row, col], list):
                         pretty_cabin.loc[row, col] = '+'
+                    elif isinstance(pretty_cabin.loc[row, col], str) and pretty_cabin.loc[row, col] != 'P':
+                        pretty_cabin.loc[row, col] = '+'
+                            
                     else:
                         pass
                         
@@ -153,11 +159,15 @@ class Airplane:
     def deplane(self):
         self.next_seat = str(self.start_row + self.rows) + str(self.seat_letters[0])
         self.last_assigned_seat = None
-        plane_index = list(range(self.start_row, self.start_row+self.rows+1))
-        self.cabin = pd.DataFrame(index=plane_index, columns=self.seat_letters).fillna(0)
+        # plane_index = list(range(self.start_row, self.start_row+self.rows+1))
+        # self.cabin = pd.DataFrame(index=plane_index, columns=self.seat_letters, dtype=object).fillna(0)
         for col in self.seat_letters:
             if col == ' ':
                 self.cabin[col] = aisle
+            else:
+                self.cabin[col] = 0
+                self.cabin[col] = self.cabin[col].astype(object)
+            
         
         self.remaining_seats_to_assign = self.booked_seats
         self.free_seats = self.total_seats - self.booked_seats
