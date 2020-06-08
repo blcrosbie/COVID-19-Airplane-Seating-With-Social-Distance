@@ -1,6 +1,11 @@
 # -*- coding: utf-8 -*-
 
+import pandas as pd
+import matplotlib as plt
 
+from assign_seats import SeatPassenger
+from block_seats import SocialDistance
+from find_seats import find_next_seat
 
 
 def calculate_max_accommodation(airplane, offsets, view_charts):
@@ -16,10 +21,14 @@ def calculate_max_accommodation(airplane, offsets, view_charts):
             dont_try_hard -= 1
             
             pre_assigned_seat = airplane.last_assigned_seat
-            SeatPassenger(airplane, **sd_offset)
+            blocked_list = SocialDistance(airplane, sd_offset)
+            print(blocked_list)
+            SeatPassenger(airplane, blocked_list)
             
             if pre_assigned_seat != airplane.last_assigned_seat:
                 assign_success += 1
+                
+            find_next_seat(airplane)
         
         update_key = 'offset_' + str(i)
         max_accommodation.update({update_key: assign_success})
@@ -71,7 +80,7 @@ def calculate_buffer_ratio(airplane, offsets, offset_max_seats, view_charts):
 
         # need to run another for loop to build the factor based on capacity of plane
         for s in range(offset_max_count, total_seats+1):
-            factor = s/my_plane.total_seats
+            factor = s/airplane.total_seats
             seat_count = int(factor*offset_max_count)
 
             # two variable problem still
@@ -142,36 +151,6 @@ def calculate_buffer_ratio(airplane, offsets, offset_max_seats, view_charts):
     return buffer_dict
 
 
-
-def AnalyzeSocialDistance(airplane, offsets, order_on, view_charts=False):
-    # this function returns a dictionary to show the max total each social distance offset may accommodate
-    # along with the ratio of buffer seats required to satisfy the spacing intervals
-    offsets_analyzed = {'no_offset': {'offset': default_offset, 'max_accommodation': airplane.total_seats, 'buffer_ratio': '1:0'}}
-    
-    # find max accommodation per offset 
-    max_accommodation = calculate_max_accommodation(airplane, offsets, view_charts)
-    
-    # find buffer seat ratios
-    buffer_ratios = calculate_buffer_ratio(airplane, offsets, max_accommodation, view_charts)
-       
-    # combine details into analyzed dictionary 
-    for i in range(1, len(offsets)):
-        offkey = 'offset_' + str(i)    
-        offsets_analyzed.update({offkey: {'offset': offsets[i],                                          'max_accommodation': max_accommodation[offkey],                                            'buffer_ratio': buffer_ratios[offkey]}})
-    
-    # Add an order detail to offsets
-    if order_on == 'max_accommodation':
-        depth = 2  # theres dictionary depth recursion caclulator, already wrote this in DataWrangler, but for now
-        ascending = True
-        prioritize_dictionary_on_attribute(offsets_analyzed, order_on, depth, ascending)
-    else:
-        print("Need to add method of prioritization on {}".format(order_on))
-    
-    
-    return offsets_analyzed  
-    
-
-
 # Assign order to offset dictionary based on which method maximizes spacing (min value for max_accommodation):
 def prioritize_dictionary_on_attribute(dictionary, attribute, depth=1, ascending=True):
     # pass in a dictionary of depth 1 or 2
@@ -236,87 +215,42 @@ def prioritize_dictionary_on_attribute(dictionary, attribute, depth=1, ascending
         prev_check = check_val
     
     return 
+
+
+def AnalyzeSocialDistance(airplane, offsets, no_offset, order_on, view_charts=False):
+    # this function returns a dictionary to show the max total each social distance offset may accommodate
+    # along with the ratio of buffer seats required to satisfy the spacing intervals
+    offsets_analyzed = {'no_offset': {'offset': no_offset, 'max_accommodation': airplane.total_seats, 'buffer_ratio': '1:0'}}
+    
+    # find max accommodation per offset 
+    max_accommodation = calculate_max_accommodation(airplane, offsets, view_charts)
+    
+    # find buffer seat ratios
+    buffer_ratios = calculate_buffer_ratio(airplane, offsets, max_accommodation, view_charts)
+       
+    # combine details into analyzed dictionary 
+    for i in range(1, len(offsets)):
+        offkey = 'offset_' + str(i)    
+        offsets_analyzed.update({offkey: {'offset': offsets[i],
+                                          'max_accommodation': max_accommodation[offkey],
+                                          'buffer_ratio': buffer_ratios[offkey]}})
+    
+    # Add an order detail to offsets
+    if order_on == 'max_accommodation':
+        depth = 2  # theres dictionary depth recursion caclulator, already wrote this in DataWrangler, but for now
+        ascending = True
+        prioritize_dictionary_on_attribute(offsets_analyzed, order_on, depth, ascending)
+    else:
+        print("Need to add method of prioritization on {}".format(order_on))
+    
+    
+    return offsets_analyzed  
+    
+
+
+
             
       
 
-def order_offset_list(offset_dict, primary_order=0, depth=2):
-    order_list = []
-    
-    for o in range(0, len(offset_dict)):
-        # balance in order defined in lookup
-        for key, info in offset_dict.items():
-            if info['order'] == o and o >= primary_order:
-                order_list.append(info)
-                
-    return order_list
 
 
-
-
-def offset_selector(airplane, passenger, offset_dict):
-    
-    # randomly selected these, probably should research a bit more to be specific
-    min_age = 10
-    max_age = 55
-    
-    # based on current airplane occupancy and booking, what is the best possible offset
-    order_of_offsets = order_offset_list(offset_dict)
-    best_offset = None
-    buffer = 0
-    req_seats = 1
-    
-    # start from the least spacing and go to most spacing offset method
-    o = 0
-    enough_space = False
-    
-    while best_offset is None and o < len(order_of_offsets):
-        offset = order_of_offsets[o]['offset']
-        buffer = np.float32(order_of_offsets[o]['buffer_ratio'].split(':')[1])
-        
-        # recalculate requirements
-        buffer = int(1+buffer)
-        enough_space = (buffer <= airplane.free_seats)
-        
-        if enough_space:
-            # allow o >= 0 for preexisting conditions
-            if passenger.has_preexisting_condition:
-                best_offset = offset
-                best_buffer = buffer
-                order = o
-
-            # allow o >= 1 for travel history
-            elif passenger.has_travelled and o >= 1:
-                best_offset = offset
-                best_buffer = buffer
-                order = o
-
-            # allow o >= 2
-            elif passenger.age > max_age and o >= 2:
-                best_offset = offset
-                best_buffer = buffer
-                order = o
-                
-            # allow o >= 3
-            elif passenger.age < min_age and passenger.group_size == 1 and o >= 3:
-                best_offset = offset
-                best_buffer = buffer
-                order = o
-            
-            # Don't allow all the group passengers to take all the offsets unless they qualify above
-            elif passenger.group_size > 1 and o >= 4:
-                best_offset = offset
-                best_buffer = buffer
-                order = o
-        else:
-            best_offset = order_of_offsets[-1]
-            buffer = 0
-            order = len(order_of_offsets)-1
-        
-        
-        # Don't forget the decrement
-        o += 1
-
-    print(o)
-    best_offset.update({'order':order})
-    
-    return best_offset

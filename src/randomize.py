@@ -6,7 +6,7 @@ import uuid
 
 
 ###############################################################################
-def create_random_passengers(number_of_passengers, view_stats=False):
+def create_passenger_roster(number_of_passengers, view_stats=False):
     # randomize characteristics
     # 0. Age
     # 1. uuid

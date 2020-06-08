@@ -1,10 +1,6 @@
 # -*- coding: utf-8 -*-
 # Functions to form social distance block
 
-from find_seats import skip_seat
-
-
-
 
 def horizontal_block(airplane, offset):
     horizontal_blocked_seats = list()
@@ -352,5 +348,50 @@ def check_blocked_seats(airplane, seat_list):
         return False  
 
 
+
+# Function: SocialDistance (Input)
+# Input:    (airplane:   Airplane class object
+#            offset: dictionary of x and y offset to properly space passenger apart from other passengers)
+#                    including a method to define block, full_block, shaved_corners, cardinal_only
+#
+# Ouput: this has no Output, but it does Update the Airplane class Object
+#
+# Object Update: this Method updates the "airplane.next_seat" by using the "airplane.skip_seat()" method
+#         which assigns a int(1) to the seat_state as it passes to the next available seat cursor
+#
+# Comment: 
+#          
+#   
+
+def SocialDistance(airplane, offset, occupied_state='P'):     
+    # use modular functions to create Social Distance: 'SD' block list of seats 
+#     try:
+    blocked_seat_list = create_sd_block_list(airplane, offset)
+
+    print("BLOCKED SEAT IN SD FUNCTION: ", blocked_seat_list)
+    # now check the blocked seat list to ensure no passengers are encroaching on Social Distance Offset
+    check_flag = check_blocked_seats(airplane, blocked_seat_list)
+
+
+    if check_flag:
+        # continue onward, this blocked seat list is GOOD!
+        return blocked_seat_list
+    else:
+        print()
+        print("SKIP IN SOCIAL DISTANCE")
+        before_skip = airplane.next_seat
+        airplane.skip_seat()
+        after_skip = airplane.next_seat    
+        
+        print("Before: ", before_skip)
+        print("After: ", after_skip)
+
+        return SocialDistance(airplane, occupied_state, offset)
+
+    
+#     except Exception as e:
+#         print("SocialDistance Error: {}".format(e))
+#         print(airplane.view_plane())
+#         print(occupied_state)
 
 

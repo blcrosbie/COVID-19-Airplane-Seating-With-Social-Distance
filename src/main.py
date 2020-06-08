@@ -21,157 +21,224 @@
 
 
 import os, sys
-import numpy as np
-import pandas as pd
 
-#from assign_seats import BoardPassengers
-#from block_seats import SocialDistance
 
-from find_seats import find_next_seat, group_find_next_seat
 
-from offset_analyze import AnalyzeSocialDistance
-
+from randomize import create_passenger_roster
 
 LOCAL_SRC_DIR = os.path.dirname(os.path.abspath(__file__))
 LOCAL_REPO_DIR = os.path.dirname(LOCAL_SRC_DIR)
 LOCAL_BASE_DIR = os.path.dirname(LOCAL_REPO_DIR)
-sys.path.append(LOCAL_REPO_DIR)
 
-from tests import random_passengers
-from models import Airplane, Passenger
+LOCAL_MODELS_DIR = os.path.join(LOCAL_REPO_DIR, "models")
+sys.path.append(LOCAL_MODELS_DIR)
 
+from airplane import Airplane
+from passenger import Passenger
 
-
-
-
-###################################################################################################    
-# Function: SocialDistance (Input)
-# Input:    (airplane:   Airplane class object
-#            offset: dictionary of x and y offset to properly space passenger apart from other passengers)
-#                    including a method to define block, full_block, shaved_corners, cardinal_only
-#
-# Ouput: this has no Output, but it does Update the Airplane class Object
-#
-# Object Update: this Method updates the "airplane.next_seat" by using the "airplane.skip_seat()" method
-#         which assigns a int(1) to the seat_state as it passes to the next available seat cursor
-#
-# Comment: 
-#          
-#   
-
-def SocialDistance(airplane, occupied_state, offset):     
-    # use modular functions to create Social Distance: 'SD' block list of seats 
-#     try:
-    blocked_seat_list = create_sd_block_list(airplane, offset)
-
-    print("BLOCKED SEAT IN SD FUNCTION: ", blocked_seat_list)
-    # now check the blocked seat list to ensure no passengers are encroaching on Social Distance Offset
-    check_flag = check_blocked_seats(airplane, blocked_seat_list)
+from find_seats import find_next_seat, group_find_next_seat
+from offset_analyze import AnalyzeSocialDistance
+from assign_seats import SeatPassenger
+from block_seats import SocialDistance
 
 
-    if check_flag:
-        # continue onward, this blocked seat list is GOOD!
-        return blocked_seat_list
+
+
+
+##############################################################################################################
+# STEP 1: GET AIRPLANE AND LIST OF PASSENGERS
+
+def initialize_airplane(debug=False, capacity=0.0, option=0):
+    
+    if debug:
+        plane = Airplane(airplane_choices[option])
+        plane.create_cabin(capacity)
+    
     else:
-        print("SKIP IN SOCIAL DISTANCE")
-        print(airplane.next_seat)
-        print()
-        skip_seat(airplane, airplane.next_seat, occupied_state)
-        print(airplane.next_seat)            
-
-        return SocialDistance(airplane, occupied_state, offset)
-
+        # CHOOSE AIRPLANE MODEL
+        option = len(airplane_choices)
+        attempts = 3
+        
+        # have a prompt to select airplane: use input to select 0, 1, 2
+        print("Choose an Airplane Model")
+        for opt, apln in airplane_choices.items():
+            print("\tEnter {} for {}".format(opt, apln))
+              
+        while option not in list(airplane_choices.keys()):
+            input_plane_option = input("Enter Option: ")
+            print()
+            
+            try:
+                assert isinstance(int(input_plane_option), int), "\nNOT A VALID ENTRY. TRY AGAIN"
+                option = int(input_plane_option)
+                assert option in list(range(0,len(airplane_choices))), "\nNOT A VALID AIRPLANE CHOICE"
+            except Exception as e:
+                attempts -= 1
+                print(e)
+                print("\tRemaining Attempts: {}\n".format(attempts))
+                
+            
+        ### BUILD AIRPLANE
+        plane = Airplane(airplane_choices[option])
+        capacity = plane.booked_seats/plane.total_seats
+        plane.create_cabin(capacity)
+        
     
-#     except Exception as e:
-#         print("SocialDistance Error: {}".format(e))
-#         print(airplane.view_plane())
-#         print(occupied_state)
-
-
-### DEFINE SPACING OFFSETS
-# global default offset for social distancing
-default_offset = {'x': 0, 'y': 0, 'method': 'cardinal_only'}
-
-# Default Offset declared in globals as x: 0 y: 0, the conventional seating method
-offset_1 = {'x': 2, 'y': 1, 'method': 'full_block'}
-offset_2 = {'x': 2, 'y': 1, 'method': 'shaved_corners'}
-offset_3 = {'x': 1, 'y': 1, 'method': 'full_block'}
-offset_4 = {'x': 1, 'y': 1, 'method': 'cardinal_only'}
-offset_5 = {'x': 1, 'y': 0, 'method': 'cardinal_only'}
-my_sd_offsets = [default_offset, offset_1, offset_2, offset_3, offset_4, offset_5]
-
-# SET ORDER PRIORITY FOR OFFSETS
-my_order_on_attr = 'max_accommodation'
-
-# DEFINE AIRPLANE CHOICES
-airplane_choices = {0:'Boeing_737', 1:'Boeing_787', 2:'Airbus_380'}
-
-# TESTING AND DEBUGGING PARAMETERS
-DEBUG = True
-# DEBUG = False
-test_capacity = 0.66
-age_threshold = 50
-
-# TEST PLANE
-# option = 0
-# option = 1
-option = 2
-my_plane = Airplane(airplane_choices[option])
-offset_info = {}
-
-
-
-########################################################################################
-### DEBUG ###
-# # randomly assign plane capacity, setting a threshold at 15%
-# min_threshold = 0.25 
-# capacity = round(max(min_threshold, random.random()),3)
-
-if DEBUG:
-    my_plane.create_cabin(test_capacity)
-
-    if offset_info == {}:
-        offset_info = AnalyzeSocialDistance(my_plane, my_sd_offsets, my_order_on_attr, view_charts=True)
+    return plane
+        
+        
+        
     
-    # No create the passengers and put in DataFrame
-    passengers_df = random_passengers.create_random_passengers(my_plane.booked_seats, view_stats=False)
-    print(passengers_df.head())
+def initialize_passengers(debug=False, passengers_booked=0):
     
-    # Board the Passengers!
-#    passengers_df = BoardPassengers(my_plane, passengers_df, offset_info)
-
-
-
-
-###################################################################################################    
-# Function: BoardAirplane (Input)
-# Input:    (airplane:   Airplane class object
-#                   df : dataframe of passengers            
-#                   offset: dictionary of x and y offset to properly space passenger apart from other passengers)
-#                    including a method to define block, full_block, shaved_corners, cardinal_only
-#
-# Ouput: this has no Output, but it does Update the Airplane class Object
-#
-# Object Update: this Method updates the "airplane.next_seat" by using the "airplane.skip_seat()" method
-#         which assigns a int(1) to the seat_state as it passes to the next available seat cursor
-#
-# Comment: 
-#          
-#   
-def test_AssignSeating(airplane, df, offset_dict):
-    my_plane.create_cabin(test_capacity)
-    offset_info = {}
-    if offset_info == {}:
-        offset_info = AnalyzeSocialDistance(my_plane, my_sd_offsets, my_order_on_attr, view_charts=True)
+    if debug:    
+        df = create_passenger_roster(passengers_booked, view_stats=False)
+    else:
+        # import csv with passengers
+        pass
     
-    # No create the passengers and put in DataFrame
-    passengers_df = random_passengers.create_random_passengers(my_plane.booked_seats, view_stats=False)
-    print(passengers_df.head())
+    return df
 
 
+
+def initialize_offsets(no_offset, debug=False):
+    if debug:
+        # Default Offset declared in globals as x: 0 y: 0, the conventional seating method
+        # THIS COULD BE REDEFINED TO ALLOW CUSTOMIZATION: SET BY MAX X and Y from user
+        offset_1 = {'x': 2, 'y': 1, 'method': 'full_block'}
+        offset_2 = {'x': 2, 'y': 1, 'method': 'shaved_corners'}
+        offset_3 = {'x': 1, 'y': 1, 'method': 'full_block'}
+        offset_4 = {'x': 1, 'y': 1, 'method': 'cardinal_only'}
+        offset_5 = {'x': 1, 'y': 0, 'method': 'cardinal_only'}
+        
+        sd_offsets = [no_offset, offset_1, offset_2, offset_3, offset_4, offset_5]
+        
+        
+    else:
+        # ask user for MAX value X, Y
+        # iterate through decrement from max to 0, cycle through full-block, shaved-corners, cardinal-only
+        # once Y=0 and X=1 and cardinal only, finish list
+        sd_offsets = []
+        pass
+    
+
+    return sd_offsets
+    
+        
+    
+
+##############################################################################################################
+# STEP 2: OFFSET ANALYSIS FOR SPECIFIC CASE
+
+
+
+
+
+##############################################################################################################
+# STEP 3: 
+
+###################################################################################################
+        
+
+
+def group_AssignSeat(airplane, df, group_list, offset_dict):
+    success = 0
+ 
+    # Filter from all groups to groups of this size        
+    group_df = find_members_in_group(df[df['group_size'] == len(group_list)], group_list)
+    sort_on = ['number_of_flags', 'age']
+    group_df = group_df.sort_values(by=sort_on, ascending=False)
+    group_df = group_df.reset_index(drop=True)
+
+
+    # iterate through each member in this group
+    for row in group_df.index:
+        this_row = group_df[group_df.index == row]
+        pID = group_df.loc[row, 'pID']
+        this_psgr = Passenger(pID)
+
+        age = group_df.loc[row, 'age']
+        group = group_df.loc[row, 'group']
+        has_travelled = group_df.loc[row, 'has_travelled']
+        has_precon = group_df.loc[row, 'has_preexisting_condition']
+
+        this_psgr.fill_questionare(age, group, has_travelled, has_precon)        
+        this_offset = offset_selector(airplane, this_psgr, offset_dict)
+
+        group_df.loc[row, 'offset_order'] = this_offset['order'] 
+        group_df.loc[row, 'offset_x'] = this_offset['x']
+        group_df.loc[row, 'offset_y'] = this_offset['y']
+        group_df.loc[row, 'offset_method'] = this_offset['method']
+
+        #group passenger seating method
+        prev_assigned_seat = airplane.last_assigned_seat
+        # Allowed Group Passenger Seat_State = 'G'
+        print("BEFORE SEATING: ")
+        print("PREV: ", prev_assigned_seat)
+        print("NEXT SEAT TO ASSIGN: ",airplane.next_seat)
+        SeatPassenger(airplane, occupied_state='G', **this_offset)
+        print("AFTER SEATING: ")
+        print("JUST ASSIGNED: ", airplane.last_assigned_seat)
+        if prev_assigned_seat is not None and success < len(group_list)-1:
+            assert prev_assigned_seat != airplane.last_assigned_seat, "Unable to Seat"
+
+        group_df.loc[row, 'seat'] = airplane.last_assigned_seat
+        success += 1
+        group_find_next_seat(airplane)
+        print("NEXT SEAT TO ASSIGN: ", airplane.next_seat)
+        airplane.update()
+
+    print("SUCCESSFUL SEATING COUNT: ",success)
+    assert success >= len(group_list)-1, "NOT ALL PASSENGERS IN GROUP SEATED"
+    group_ToggleState(airplane, group_df)
+    
+    # update MAIN df with seat assignments
+    df = update_seat_roster(df, group_df)
+    
+    
+    return df
+
+
+###############################################################################
+    
+def single_AssignSeat(airplane, df, offset_info):
+    # make a passenger from this row
+    for row in df.index:
+        this_row = df[df.index == row]
+        pID = df.loc[row, 'pID']
+        this_psgr = Passenger(pID)
+
+        age = df.loc[row, 'age']
+        group = []
+        has_travelled = df.loc[row, 'has_travelled']
+        has_precon = df.loc[row, 'has_preexisting_condition']
+
+        this_psgr.fill_questionare(age, group, has_travelled, has_precon)        
+        this_offset = offset_selector(airplane, this_psgr, offset_info)
+
+        df.loc[row, 'offset_order'] = this_offset['order'] 
+        df.loc[row, 'offset_x'] = this_offset['x']
+        df.loc[row, 'offset_y'] = this_offset['y']
+        df.loc[row, 'offset_method'] = this_offset['method']
+
+        prev_assigned_seat = airplane.last_assigned_seat
+        SeatPassenger(airplane, **this_offset)
+        
+        assert prev_assigned_seat != airplane.last_assigned_seat, "Unsuccessful Seating!"
+        
+        df.loc[row, 'seat'] = airplane.last_assigned_seat
+        
+        find_next_seat(airplane, occupied_state='P')
+        airplane.update()
+
+        
+    return df
+
+
+##############################################################################################################
+# STEP 4: Assign the Seat and fill in Social Distance block offsets 
 
 def AssignSeating(airplane, df, offset_dict):
-    offset_info = {}
     # Validations on Passenger List
     assert not df.empty, "No Passengers to Board"
     
@@ -195,51 +262,60 @@ def AssignSeating(airplane, df, offset_dict):
     return df
 
 
-##############################################################################################################
-### Actual Main Starts here
+
+###################################################################################################    
+# STEP 0:
+    
+# DECLARE SOME GLOBAL PARAMETERS
+
+# DEFINE AIRPLANE CHOICES
+airplane_choices = {0:'Boeing_737', 1:'Boeing_787', 2:'Airbus_380'}
+
+### DEFINE SPACING OFFSETS
+# global default offset for social distancing
+default_offset = {'x': 0, 'y': 0, 'method': 'cardinal_only'}
+
+# Initialize Offset Info
+offset_info = {}
+
+
+
+# TEST vs. PROD
+
+# if in test mode, use 1 of the 3 airplan models
+# else allow user to choose, interactive input mode
+
+
+# if in test mode, create artificial passengers
+# else:    input csv of passenger roster
+
+# CONTINUE ON SAME FROM THERE
+
 if __name__ == '__main__':
-
+    
     DEBUG = True
+    test_capacity = 0.66
+    age_threshold = 50
+    test_option = 2
     
-    if DEBUG:
-        # create random passengers
-        # use airplane model, build with random capacity
+    # 1. USER INPUTS or RANDOMIZED
+    # 1a. BUILD PLANE
+    my_plane = initialize_airplane(debug=DEBUG, capacity=test_capacity, option=test_option)
         
+    # 1b. RANDOM PASSENGERS
+    passengers_df = initialize_passengers(debug=DEBUG, passengers_booked=my_plane.booked_seats)
     
-    test_AssignSeating()
-#    AssignSeating()
-
-
-
-
-if not DEBUG:
-    # CHOOSE AIRPLANE MODEL
-    option = len(airplane_choices)
-    attempts = 3
-    
-    # have a prompt to select airplane: use input to select 0, 1, 2
-    print("Choose an Airplane Model")
-    for opt, plane in airplane_choices.items():
-        print("\tEnter {} for {}".format(opt, plane))
-          
-    while option not in list(airplane_choices.keys()):
-        input_plane_option = input("Enter Option: ")
-        print()
+    # 1c. set the spacing offsets
+    my_sd_offsets = initialize_offsets(default_offset, debug=DEBUG)
         
-        try:
-            assert isinstance(int(input_plane_option), int), "\nNOT A VALID ENTRY. TRY AGAIN"
-            option = int(input_plane_option)
-            assert option in list(range(0,len(airplane_choices))), "\nNOT A VALID AIRPLANE CHOICE"
-        except Exception as e:
-            attempts -= 1
-            print(e)
-            print("\tRemaining Attempts: {}\n".format(attempts))
-            
-        
-    ### BUILD AIRPLANE
-    my_plane = Airplane(airplane_choices[option])
-    my_plane.create_cabin()
+    # 2. ANALYZE OFFSET FOR THIS CASE PROBLEM
+    # order priority for offsets ( AGAIN COULD BE USER DEFINED RADIO BUTTON MAX ACCOMMODATION OR other attribute)
+    my_order_on_attr = 'max_accommodation'
+    offset_info =  AnalyzeSocialDistance(my_plane, my_sd_offsets, default_offset, my_order_on_attr)
     
-    ### ANALYZE POSSIBLE OFFSETS FOR AIRPLANE
-    offset_info = AnalyzeSocialDistance(my_plane, my_sd_offsets, my_order_on_attr, view_charts=True)
+    # 3. Start Seating Group Passengers
+    
+    
+    
+
     
