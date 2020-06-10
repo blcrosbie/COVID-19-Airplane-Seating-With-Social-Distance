@@ -210,52 +210,47 @@ def AssignSeating(airplane, df, offset_dict, debug=False):
    
     
     # Finish with Singles, prioritize spacing on preexisting, travel, age
-    single_df = df[df['group_size'] == 1]
-    
-    if debug:
-        print("Number of Free seats for Buffer: ", airplane.free_seats)
-        print("Number of Passengers with Pre-Existing Conditions: ", len(single_df[single_df['has_preexisting_condition'] == True]))
-    
+    single_df = df[df['group_size'] == 1]    
     single_df = single_AssignSeat(airplane, single_df, offset_dict)
     df = update_seat_roster(df, single_df)
 
     
-    # run clean up on last passengers
-    if airplane.remaining_seats_to_assign > 0:
-        duplicate_seats = df['seat'].drop_duplicates()
-        index_dup = list()
-        for i in range(0, len(df)):
-            if i not in list(duplicate_seats.index):
-                index_dup.append(i)
+    # # run clean up on last passengers
+    # if airplane.remaining_seats_to_assign > 0:
+    #     duplicate_seats = df['seat'].drop_duplicates()
+    #     index_dup = list()
+    #     for i in range(0, len(df)):
+    #         if i not in list(duplicate_seats.index):
+    #             index_dup.append(i)
                 
-        print(index_dup)
+    #     print(index_dup)
         
-        for row_skip in index_dup:
-            # for each duplicated seat, set it back to a skip seat
-            dup_seat = df.loc[row_skip, 'seat']
-            dup_row = int(dup_seat[:-1])
-            dup_col = dup_seat[-1]
-            airplane.cabin.loc[dup_row, dup_col] = 1
-            df.loc[row_skip, 'seat'] = 0
+    #     for row_skip in index_dup:
+    #         # for each duplicated seat, set it back to a skip seat
+    #         dup_seat = df.loc[row_skip, 'seat']
+    #         dup_row = int(dup_seat[:-1])
+    #         dup_col = dup_seat[-1]
+    #         airplane.cabin.loc[dup_row, dup_col] = 1
+    #         df.loc[row_skip, 'seat'] = 0
             
         
-        airplane.next_seat = str(airplane.start_row + airplane.rows) + airplane.seat_letters[0]
-        single_find_next_seat(airplane, True)
-        print(airplane.next_seat)
+    #     airplane.next_seat = str(airplane.start_row + airplane.rows) + airplane.seat_letters[0]
+    #     single_find_next_seat(airplane, True)
+    #     print(airplane.next_seat)
         
-        for row_reseat in index_dup:
-            df.loc[row_reseat, 'seat'] = airplane.next_seat
-            new_row = int(airplane.next_seat[:-1])
-            new_col = airplane.next_seat[-1]
-            airplane.cabin.loc[new_row, new_col] = 'P'
-            airplane.update()
-            single_find_next_seat(airplane, True)
+    #     for row_reseat in index_dup:
+    #         df.loc[row_reseat, 'seat'] = airplane.next_seat
+    #         new_row = int(airplane.next_seat[:-1])
+    #         new_col = airplane.next_seat[-1]
+    #         airplane.cabin.loc[new_row, new_col] = 'P'
+    #         airplane.update()
+    #         single_find_next_seat(airplane, True)
             
         
         
         
 
-    print("SINGLES FINISHED")   
+
 
     return df
 
@@ -350,7 +345,7 @@ if __name__ == '__main__':
     # 5. Save CSV results
     save_results(passengers_df, my_plane, LOCAL_REPO_DIR)
     
-    print("DONE")
+
 
     
     

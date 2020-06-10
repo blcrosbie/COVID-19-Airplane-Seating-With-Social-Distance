@@ -59,7 +59,7 @@ def order_offset_list(offset_dict, primary_order=0, depth=2):
 
 
 
-def offset_selector(airplane, passenger, offset_dict):
+def offset_selector(airplane, passenger, offset_dict, limiter=0):
     
     # randomly selected these, probably should research a bit more to be specific
     min_age = 10
@@ -83,7 +83,13 @@ def offset_selector(airplane, passenger, offset_dict):
         
         # recalculate requirements
         buffer = int(1+buffer)
-        enough_space = (buffer <= airplane.free_seats)
+        
+        if limiter == 0:        
+            enough_space = (buffer <= airplane.free_seats)
+        else:
+            free = airplane.free_seats
+            ideal = free/limiter
+            enough_space = (buffer < ideal)
         
         if passenger.group_size > 1:
             hyst = 2
@@ -286,8 +292,11 @@ def single_AssignSeat(airplane, df, offset_info):
         has_travelled = df.loc[row, 'has_travelled']
         has_precon = df.loc[row, 'has_preexisting_condition']
     
-        this_psgr.fill_questionare(age, group, has_travelled, has_precon)        
-        this_offset_detail = offset_selector(airplane, this_psgr, offset_info)
+        this_psgr.fill_questionare(age, group, has_travelled, has_precon)
+        
+        condition_count = len(df[df['has_preexisting_condition'] == True])
+        
+        this_offset_detail = offset_selector(airplane, this_psgr, offset_info, limiter=condition_count)
         this_offset = this_offset_detail['offset']
 
         df.loc[row, 'offset_order'] = this_offset_detail['order'] 
