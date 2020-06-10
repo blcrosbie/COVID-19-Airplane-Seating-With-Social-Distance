@@ -2,8 +2,13 @@
 
 import pandas as pd
 
+from passenger import Passenger
+from block_seats import SocialDistance
+from find_seats import find_next_seat, group_find_next_seat, single_find_next_seat
 
 ###############################################################################
+
+
 def count_flags(*flags_to_check):
     flag_count = 0
     for flag in flags_to_check:
@@ -12,7 +17,6 @@ def count_flags(*flags_to_check):
             
     return flag_count
 
-###############################################################################
 
 def init_passenger_seating(df): 
     
@@ -63,63 +67,64 @@ def offset_selector(airplane, passenger, offset_dict):
     
     # based on current airplane occupancy and booking, what is the best possible offset
     order_of_offsets = order_offset_list(offset_dict)
-    best_offset = None
-    buffer = 0
-    # req_seats = 1
     
+    if airplane.free_seats == 0:
+        best_offset = order_of_offsets[-1]
+        return best_offset
+        
+    else:
+        best_offset = None
+
     # start from the least spacing and go to most spacing offset method
     o = 0
-    enough_space = False
-    
-    while best_offset is None and o < len(order_of_offsets):
-        offset = order_of_offsets[o]['offset']
+    while best_offset is None and o < len(order_of_offsets)-1:
+        offset = order_of_offsets[o]
         buffer = float(order_of_offsets[o]['buffer_ratio'].split(':')[1])
         
         # recalculate requirements
         buffer = int(1+buffer)
         enough_space = (buffer <= airplane.free_seats)
         
-        if enough_space:
-            # allow o >= 0 for preexisting conditions
-            if passenger.has_preexisting_condition:
-                best_offset = offset
-                # best_buffer = buffer
-                order = o
-
+        if passenger.group_size > 1:
+            hyst = 2
+        else:
+            hyst = 0
+        
+        if enough_space and passenger.has_preexisting_condition and o >= hyst:
+            best_offset = offset
+        
+        elif enough_space and passenger.group_size == 1:
+                
             # allow o >= 1 for travel history
-            elif passenger.has_travelled and o >= 1:
+            if passenger.has_travelled and o >= 2:
                 best_offset = offset
-                # best_buffer = buffer
-                order = o
 
             # allow o >= 2
-            elif passenger.age > max_age and o >= 2:
+            elif passenger.age > max_age and o >= 3:
                 best_offset = offset
-                # best_buffer = buffer
-                order = o
                 
             # allow o >= 3
-            elif passenger.age < min_age and passenger.group_size == 1 and o >= 3:
+            elif passenger.age < min_age and o >= 3:
                 best_offset = offset
-                # best_buffer = buffer
-                order = o
             
             # Don't allow all the group passengers to take all the offsets unless they qualify above
-            elif passenger.group_size > 1 and o >= 4:
-                best_offset = offset
-                # best_buffer = buffer
-                order = o
-        else:
-            best_offset = order_of_offsets[-1]
-            buffer = 0
-            order = len(order_of_offsets)-1
-        
-        
-        # Don't forget the decrement
-        o += 1
+            elif o >= 4:
+                best_offset = offset          
+            
+            # this else, is for passengers that shouldn't qualify for social distancing in earlier elif's
+            else:
+                o += 1
 
-    print(o)
-    best_offset.update({'order':order})
+            
+        # this else, is for when not enough space in current offset, just skip to next one
+        else:
+            o += 1
+    
+    # this if, used after while loop is done, and we run out of offset cases to check        
+    if best_offset is None:
+        best_offset = order_of_offsets[-1]
+
+
     
     return best_offset
 
@@ -190,7 +195,6 @@ def SeatPassenger(airplane, blocked_seat_list=[], occupied_state='P'):
 
     if blocked_seat_list == []:
         # this is default offset, no blocked seats SocialDistance function
-        print("empty blocked seat list")
         pass
 
     else:   
@@ -205,9 +209,6 @@ def SeatPassenger(airplane, blocked_seat_list=[], occupied_state='P'):
 
             if airplane.cabin.loc[row, col] == 'P' or airplane.cabin.loc[row, col] == 'G':
                 pass
-        
-            # elif isinstance(airplane.cabin.loc[row, col], str):
-            #     print("SHOULD NOT BE STRING UNLESS G or P above")
                                                 
             # if currently an integer, overwrite
             elif isinstance(airplane.cabin.loc[row, col], int):
@@ -244,8 +245,7 @@ def SeatPassenger(airplane, blocked_seat_list=[], occupied_state='P'):
                     airplane.cabin.loc[row, col] = xy_list
                                 
             else:
-                print(type(airplane.cabin.loc[row, col]))
-                print(airplane.cabin.loc[row, col])
+                print("HOW DID I GET HERE in SEAT PASSENGER")
 
     
     # assign actual passenger to seat, after blocked list is set
@@ -259,11 +259,63 @@ def SeatPassenger(airplane, blocked_seat_list=[], occupied_state='P'):
 
 
 
+###############################################################################
+
+def update_seat_roster(df, sub_df):
+    # now update the main df_passenger dataframe with this information from each df_group
+    for row in sub_df.index:
+        df.loc[row, :] = sub_df.loc[row, :]
+    
+    return df
+
 
 ###############################################################################
+# SINGLE SEATING FUNCTION
 ###############################################################################
+    
+def single_AssignSeat(airplane, df, offset_info):
+    sort_on = ['number_of_flags', 'age']
+    df = df.sort_values(by=sort_on, ascending=False)
+    
+    for row in df.index: 
+        pID = df.loc[row, 'pID']
+        this_psgr = Passenger(pID)
+    
+        age = df.loc[row, 'age']
+        group = []
+        has_travelled = df.loc[row, 'has_travelled']
+        has_precon = df.loc[row, 'has_preexisting_condition']
+    
+        this_psgr.fill_questionare(age, group, has_travelled, has_precon)        
+        this_offset_detail = offset_selector(airplane, this_psgr, offset_info)
+        this_offset = this_offset_detail['offset']
+
+        df.loc[row, 'offset_order'] = this_offset_detail['order'] 
+        df.loc[row, 'offset_x'] = this_offset['x']
+        df.loc[row, 'offset_y'] = this_offset['y']
+        df.loc[row, 'offset_method'] = this_offset['method']
+            
+        blocked_seat_list = SocialDistance(airplane, this_offset, occupied_state='P')
+        SeatPassenger(airplane, blocked_seat_list, occupied_state='P')
+        
+        # assert prev_assigned_seat != airplane.last_assigned_seat, "Unsuccessful Seating!"
+        
+        df.loc[row, 'seat'] = airplane.last_assigned_seat
+        
+        single_find_next_seat(airplane)
+        airplane.update()
+
+        
+    return df
+
+
+
+###############################################################################
+
 ###############################################################################
 # GROUP SEATING FUNCTIONS
+###############################################################################
+
 
 
 def group_ToggleState(airplane, group_df):
@@ -272,31 +324,14 @@ def group_ToggleState(airplane, group_df):
         seat = group_df['seat'][psgr]
         seat_row = int(seat[:-1])
         seat_col = seat[-1]
-        old_seat_state = airplane.cabin[seat_col][seat_row]
-        
+        old_seat_state = airplane.cabin[seat_col][seat_row]     
         if old_seat_state == 'G':
             airplane.cabin.loc[seat_row, seat_col] = 'P'
             
     assert ((airplane.cabin == 'G').sum(axis=1)).sum(axis=0) == 0, "CLEAN UP GROUPS!"
     return
 
-###############################################################################
 
-# build unique group lists from total dataframe
-def find_unique_groups(df):
-    # Now Find the Unique Groupings of Passengers
-    all_groups_df = df[df['group_size'] > 1]
-    
-    try:
-        assert not all_groups_df.empty, "NO GROUPS IN PASSENGER LIST"
-        unique_groups_list = all_groups_df['group'].drop_duplicates().reset_index(drop=True).to_list()
-    
-    except Exception as e:
-        print(e)
-        
-    return unique_groups_list
-
-###################################################################################################
 def find_members_in_group(df, member_list):
     # Build group data frame by filtering down from all groups of this size to just members
     try:
@@ -310,10 +345,59 @@ def find_members_in_group(df, member_list):
     except Exception as e:
         print(e)
 
+
+
 ###################################################################################################
-def update_seat_roster(df, sub_df):
-    # now update the main df_passenger dataframe with this information from each df_group
-    for row in sub_df.index:
-        df.loc[row, :] = sub_df.loc[row, :]
+
+def group_AssignSeat(airplane, df, group_list, offset_dict):
+    success = 0
+            
     
-    return df
+    # Filter from all groups to groups of this size        
+    group_df = find_members_in_group(df[df['group_size'] == len(group_list)], group_list)
+    sort_on = ['number_of_flags', 'age']
+    group_df = group_df.sort_values(by=sort_on, ascending=False)
+    group_df = group_df.reset_index(drop=True)
+
+
+    # iterate through each member in this group
+    for row in group_df.index:
+        # this_row = group_df[group_df.index == row]
+        pID = group_df.loc[row, 'pID']
+        this_psgr = Passenger(pID)
+
+        age = group_df.loc[row, 'age']
+        group = group_df.loc[row, 'group']
+        has_travelled = group_df.loc[row, 'has_travelled']
+        has_precon = group_df.loc[row, 'has_preexisting_condition']
+
+        this_psgr.fill_questionare(age, group, has_travelled, has_precon)        
+        this_offset_detail = offset_selector(airplane, this_psgr, offset_dict)
+        this_offset = this_offset_detail['offset']
+
+        group_df.loc[row, 'offset_order'] = this_offset_detail['order'] 
+        group_df.loc[row, 'offset_x'] = this_offset['x']
+        group_df.loc[row, 'offset_y'] = this_offset['y']
+        group_df.loc[row, 'offset_method'] = this_offset['method']
+
+        #group passenger seating method
+        # Allowed Group Passenger Seat_State = 'G'        
+        blocked_seat_list = SocialDistance(airplane, this_offset, occupied_state='G')
+        SeatPassenger(airplane, blocked_seat_list, occupied_state='G')
+        
+        #if prev_assigned_seat is not None and success < len(group_list)-1:
+        #    assert prev_assigned_seat != airplane.last_assigned_seat, "Unable to Seat"
+        
+        group_df.loc[row, 'seat'] = airplane.last_assigned_seat
+        success += 1
+        group_find_next_seat(airplane)
+        airplane.update()
+
+
+    assert success == len(group_list), "NOT ALL PASSENGERS IN GROUP SEATED"
+    group_ToggleState(airplane, group_df)  
+    group_find_next_seat(airplane)
+    
+    return group_df
+
+###################################################################################################

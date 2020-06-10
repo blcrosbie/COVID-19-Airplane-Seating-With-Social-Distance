@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # Functions to form social distance block
-
+from find_seats import find_next_seat, group_find_next_seat, single_find_next_seat
 
 def horizontal_block(airplane, offset):
     horizontal_blocked_seats = list()
@@ -308,10 +308,6 @@ def read_block(block_df, seat_list):
     # calculate the number of passengers in this block after setting 'X' if seat not in reserved list
     number_of_passengers_in_block = int((block_df == 'P').sum(axis=1).sum(axis=0))
     
-    ###### DEBUGGING
-    # print(number_of_passengers_in_block)
-    # print(block_df)
-    
     return number_of_passengers_in_block
     
 
@@ -368,7 +364,6 @@ def SocialDistance(airplane, offset, occupied_state='P'):
 #     try:
     blocked_seat_list = create_sd_block_list(airplane, offset)
 
-    # print("BLOCKED SEAT IN SD FUNCTION: ", blocked_seat_list)
     # now check the blocked seat list to ensure no passengers are encroaching on Social Distance Offset
     check_flag = check_blocked_seats(airplane, blocked_seat_list)
 
@@ -377,21 +372,21 @@ def SocialDistance(airplane, offset, occupied_state='P'):
         # continue onward, this blocked seat list is GOOD!
         return blocked_seat_list
     else:
-        print()
-        print("SKIP IN SOCIAL DISTANCE")
         before_skip = airplane.next_seat
         airplane.skip_seat()
-        after_skip = airplane.next_seat    
         
-        print("Before: ", before_skip)
-        print("After: ", after_skip)
+        if occupied_state == 'P':
+            single_find_next_seat(airplane, skip_ok=False)
+        elif occupied_state == 'G':
+            group_find_next_seat(airplane, skip_ok=False)
+        else:
+            print("ERROR OCCUPIED STATE IN SOCIAL DISTANCE")
+                    
+        after_skip = airplane.next_seat
 
-        return SocialDistance(airplane, occupied_state, offset)
+        assert after_skip != before_skip, "NOT UPDATING SEAT IN SOCIAL DISTANCE RECURSION"       
 
-    
-#     except Exception as e:
-#         print("SocialDistance Error: {}".format(e))
-#         print(airplane.view_plane())
-#         print(occupied_state)
+        return SocialDistance(airplane, offset, occupied_state)
+
 
 

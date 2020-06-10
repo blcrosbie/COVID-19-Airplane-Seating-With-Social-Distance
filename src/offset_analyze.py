@@ -143,9 +143,6 @@ def calculate_buffer_ratio(airplane, offsets, offset_max_seats, view_charts):
     # find offset ratio for buffer seats
     for i in range(1, len(offsets)):
         o_key = 'offset_' + str(i)
-        # observe_df = options_df[options_df[o_key] <= options_df['accommodated_passengers']]
-        # observe_df = observe_df[observe_df[o_key] > 0]
-
         observe_df = options_df[options_df[o_key] > 0]
         observe_df = observe_df.sort_values(['capacity'], ascending=True)
         chart_df = observe_df.reset_index(drop=True)
@@ -153,20 +150,10 @@ def calculate_buffer_ratio(airplane, offsets, offset_max_seats, view_charts):
         this_buffer = 'buffer_' + str(i)
         # Buffer calculations
         chart_df[this_buffer] = chart_df[['no_offset', o_key, 'seats_reserved_for_SD']].apply(lambda x: get_buffer_ratio(*x), axis=1)
-                 
-        # slope_my_offset = round((max(chart_df[o_key]) - min(chart_df[o_key]))/len(chart_df), 3)
-        # slope_reserve = round((max(chart_df['seats_reserved_for_SD']) - min(chart_df['seats_reserved_for_SD']))/len(chart_df),3)  
-        
-        # offset_seats = offset_max_count - 1
-        # reserve = chart_df[chart_df[o_key] == offset_seats]
-        # print(reserve)
-        
-        # offset2buffer_ratio = round(slope_reserve/slope_my_offset,3)
-        offset2buffer_ratio = max(chart_df[this_buffer])
         max_buffer = max(chart_df[this_buffer])
-        # min_buffer = min(chart_df[this_buffer])
         avg_buffer = round(chart_df[this_buffer].mean(),3)
         
+        # Stringify to story in lookup
         max_buffer_ratio = '1:' + str(max_buffer) 
         buffer_ratio = '1:' +str(avg_buffer)
         max_buffer_key = 'max_buffer_' + o_key

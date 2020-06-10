@@ -106,8 +106,10 @@ class Airplane:
                 for col in pretty_cabin.columns:
                     if isinstance(pretty_cabin.loc[row, col], list):
                         pretty_cabin.loc[row, col] = '+'
-                    elif isinstance(pretty_cabin.loc[row, col], str) and pretty_cabin.loc[row, col] != 'P':
-                        pretty_cabin.loc[row, col] = '+'
+                    # elif isinstance(pretty_cabin.loc[row, col], str) and pretty_cabin.loc[row, col] != 'P':
+                    #     pretty_cabin.loc[row, col] = '+'
+                    # elif isinstance(pretty_cabin.loc[row, col], str) and pretty_cabin.loc[row, col] != 'G':
+                    #     pretty_cabin.loc[row, col] = '+'
                             
                     else:
                         pass
@@ -115,7 +117,7 @@ class Airplane:
             print(pretty_cabin)
             
         else:
-            print(self.cabin, '\n')
+            print(self.cabin)
     
     # Update - look at seat details: 
     
@@ -134,7 +136,12 @@ class Airplane:
         self.buffer_seats = buf
         
         self.free_seats = self.total_seats - self.booked_seats - self.buffer_seats 
-        assert self.free_seats >= 0, "Buffer Overflow!"
+
+        try:
+            assert self.free_seats >= 0, "Buffer Overflow!"
+    
+        except:
+            print("no more social distance seats")
     
     
     def details(self):
@@ -350,13 +357,17 @@ class Airplane:
     # Skips over the current seat, fills in with int(1) seat state and updates "next_seat"
     #      
     def skip_seat(self):    
-        if isinstance(self.next_seat_state, int):
+        if isinstance(self.next_seat_state(), int):
             skip_row = int(self.next_seat[:-1])
             skip_col = self.next_seat[-1]
             # if the seat state is 0 or 1, then it is fine to toggle to skipped seat state status=1
             self.cabin.loc[skip_row, skip_col] += 1    
+            
+        elif isinstance(self.next_seat_state(), list):
+            pass
     
         else:
+            print(self.next_seat)
             print("WHAT HAPPENED IN SKIP SEAT!")
         
         return

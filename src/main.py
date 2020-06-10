@@ -32,12 +32,11 @@ LOCAL_MODELS_DIR = os.path.join(LOCAL_REPO_DIR, "models")
 sys.path.append(LOCAL_MODELS_DIR)
 
 from airplane import Airplane
-from passenger import Passenger
-
-from find_seats import find_next_seat, group_find_next_seat
 from offset_analyze import AnalyzeSocialDistance
-from assign_seats import SeatPassenger
-from block_seats import SocialDistance
+from assign_seats import init_passenger_seating, group_AssignSeat, single_AssignSeat
+from find_seats import single_find_next_seat
+# from assign_seats import SeatPassenger
+# from block_seats import SocialDistance
 
 
 
@@ -141,7 +140,8 @@ def analyze_offsets(airplane, sd_offset_list, default_offset, view_charts=False,
     
 def initialize_passengers(debug=False, passengers_booked=0):
     
-    if debug:    
+    if debug:   
+        print("Creating Random Passenger Roster...")
         df = create_passenger_roster(passengers_booked, view_stats=False)
     else:
         # import csv with passengers
@@ -149,130 +149,152 @@ def initialize_passengers(debug=False, passengers_booked=0):
     
     return df
 
-
-###################################################################################################
-        
-
-
-def group_AssignSeat(airplane, df, group_list, offset_dict):
-    success = 0
- 
-    # Filter from all groups to groups of this size        
-    group_df = find_members_in_group(df[df['group_size'] == len(group_list)], group_list)
-    sort_on = ['number_of_flags', 'age']
-    group_df = group_df.sort_values(by=sort_on, ascending=False)
-    group_df = group_df.reset_index(drop=True)
-
-
-    # iterate through each member in this group
-    for row in group_df.index:
-        this_row = group_df[group_df.index == row]
-        pID = group_df.loc[row, 'pID']
-        this_psgr = Passenger(pID)
-
-        age = group_df.loc[row, 'age']
-        group = group_df.loc[row, 'group']
-        has_travelled = group_df.loc[row, 'has_travelled']
-        has_precon = group_df.loc[row, 'has_preexisting_condition']
-
-        this_psgr.fill_questionare(age, group, has_travelled, has_precon)        
-        this_offset = offset_selector(airplane, this_psgr, offset_dict)
-
-        group_df.loc[row, 'offset_order'] = this_offset['order'] 
-        group_df.loc[row, 'offset_x'] = this_offset['x']
-        group_df.loc[row, 'offset_y'] = this_offset['y']
-        group_df.loc[row, 'offset_method'] = this_offset['method']
-
-        #group passenger seating method
-        prev_assigned_seat = airplane.last_assigned_seat
-        # Allowed Group Passenger Seat_State = 'G'
-        print("BEFORE SEATING: ")
-        print("PREV: ", prev_assigned_seat)
-        print("NEXT SEAT TO ASSIGN: ",airplane.next_seat)
-        SeatPassenger(airplane, occupied_state='G', **this_offset)
-        print("AFTER SEATING: ")
-        print("JUST ASSIGNED: ", airplane.last_assigned_seat)
-        if prev_assigned_seat is not None and success < len(group_list)-1:
-            assert prev_assigned_seat != airplane.last_assigned_seat, "Unable to Seat"
-
-        group_df.loc[row, 'seat'] = airplane.last_assigned_seat
-        success += 1
-        group_find_next_seat(airplane)
-        print("NEXT SEAT TO ASSIGN: ", airplane.next_seat)
-        airplane.update()
-
-    print("SUCCESSFUL SEATING COUNT: ",success)
-    assert success >= len(group_list)-1, "NOT ALL PASSENGERS IN GROUP SEATED"
-    group_ToggleState(airplane, group_df)
     
-    # update MAIN df with seat assignments
-    df = update_seat_roster(df, group_df)
-    
-    
-    return df
 
-
-###############################################################################
-    
-def single_AssignSeat(airplane, df, offset_info):
-    # make a passenger from this row
-    for row in df.index:
-        this_row = df[df.index == row]
-        pID = df.loc[row, 'pID']
-        this_psgr = Passenger(pID)
-
-        age = df.loc[row, 'age']
-        group = []
-        has_travelled = df.loc[row, 'has_travelled']
-        has_precon = df.loc[row, 'has_preexisting_condition']
-
-        this_psgr.fill_questionare(age, group, has_travelled, has_precon)        
-        this_offset = offset_selector(airplane, this_psgr, offset_info)
-
-        df.loc[row, 'offset_order'] = this_offset['order'] 
-        df.loc[row, 'offset_x'] = this_offset['x']
-        df.loc[row, 'offset_y'] = this_offset['y']
-        df.loc[row, 'offset_method'] = this_offset['method']
-
-        prev_assigned_seat = airplane.last_assigned_seat
-        SeatPassenger(airplane, **this_offset)
-        
-        assert prev_assigned_seat != airplane.last_assigned_seat, "Unsuccessful Seating!"
-        
-        df.loc[row, 'seat'] = airplane.last_assigned_seat
-        
-        find_next_seat(airplane, occupied_state='P')
-        airplane.update()
-
-        
-    return df
 
 
 ##############################################################################################################
 # STEP 4: Assign the Seat and fill in Social Distance block offsets 
 
-def AssignSeating(airplane, df, offset_dict):
+
+# build unique group lists from total dataframe
+def find_unique_groups(df):
+    # Now Find the Unique Groupings of Passengers
+    all_groups_df = df[df['group_size'] > 1]
+    
+    try:
+        assert not all_groups_df.empty, "NO GROUPS IN PASSENGER LIST"
+        unique_groups_list = all_groups_df['group'].drop_duplicates().reset_index(drop=True).to_list()
+    
+    except Exception as e:
+        print(e)
+        
+    return unique_groups_list
+
+
+
+def update_seat_roster(df, sub_df):
+    # now update the main df_passenger dataframe with this information from each df_group
+    for row in sub_df.index:
+        this_pID = sub_df.loc[row, 'pID']
+        update_line = df[df['pID'] == this_pID]
+        update_row = update_line.index[0]
+
+        df.loc[update_row, :] = sub_df.loc[row, :]
+    
+    return df
+
+
+###############################################################################
+
+def AssignSeating(airplane, df, offset_dict, debug=False):
     # Validations on Passenger List
     assert not df.empty, "No Passengers to Board"
     
+    if debug:
+        print("Assigning {} Seats ...".format(airplane.booked_seats))
+    
     # Initialize seats to 0
-#    df = init_passenger_seating(df)    
+    df = init_passenger_seating(df)  
     
     # Sort passengers 
     sort_on = ['group_size', 'age']
     df = df.sort_values(by=sort_on, ascending=False)
     df = df.reset_index(drop=True)
-        
-    # Find unique groups
-#    unique_groups = find_unique_groups(df)
     
-#    for group in unique_groups: 
-#        df = group_AssignSeat(airplane, df, group, offset_dict)
-#        airplane.update()
-#        find_next_seat(airplane)
-#        airplane.view_plane()
- 
+    # Start with Grouped Passengers
+    all_groups = find_unique_groups(df)
+    for group in all_groups:
+        group_df = group_AssignSeat(airplane, df, group, offset_dict)
+        df = update_seat_roster(df, group_df)
+   
+    
+    # Finish with Singles, prioritize spacing on preexisting, travel, age
+    single_df = df[df['group_size'] == 1]
+    
+    if debug:
+        print("Number of Free seats for Buffer: ", airplane.free_seats)
+        print("Number of Passengers with Pre-Existing Conditions: ", len(single_df[single_df['has_preexisting_condition'] == True]))
+    
+    single_df = single_AssignSeat(airplane, single_df, offset_dict)
+    df = update_seat_roster(df, single_df)
+
+    
+    # run clean up on last passengers
+    if airplane.remaining_seats_to_assign > 0:
+        duplicate_seats = df['seat'].drop_duplicates()
+        index_dup = list()
+        for i in range(0, len(df)):
+            if i not in list(duplicate_seats.index):
+                index_dup.append(i)
+                
+        print(index_dup)
+        
+        for row_skip in index_dup:
+            # for each duplicated seat, set it back to a skip seat
+            dup_seat = df.loc[row_skip, 'seat']
+            dup_row = int(dup_seat[:-1])
+            dup_col = dup_seat[-1]
+            airplane.cabin.loc[dup_row, dup_col] = 1
+            df.loc[row_skip, 'seat'] = 0
+            
+        
+        airplane.next_seat = str(airplane.start_row + airplane.rows) + airplane.seat_letters[0]
+        single_find_next_seat(airplane, True)
+        print(airplane.next_seat)
+        
+        for row_reseat in index_dup:
+            df.loc[row_reseat, 'seat'] = airplane.next_seat
+            new_row = int(airplane.next_seat[:-1])
+            new_col = airplane.next_seat[-1]
+            airplane.cabin.loc[new_row, new_col] = 'P'
+            airplane.update()
+            single_find_next_seat(airplane, True)
+            
+        
+        
+        
+
+    print("SINGLES FINISHED")   
+
     return df
+
+
+###################################################################################################    
+# STEP 5: Save Results
+
+def save_results(df, airplane, repo_dir):
+    CSV_RESULTS_DIR = os.path.join(repo_dir, "results")
+    save_folder = os.path.join(CSV_RESULTS_DIR, airplane.make + '_' + airplane.model)
+    
+    count = 0
+    if count < 10:
+        leading_zero = '00'+str(count)
+    elif count < 100:
+        leading_zero = '0'+str(count)
+    else:
+        leading_zero = str(count)
+        
+    save_file = 'run_000.csv'
+    
+    fn = os.path.join(save_folder, save_file)
+    
+    while os.path.exists(fn):
+        count += 1
+        if count < 10:
+            leading_zero = '00'+str(count)
+        elif count < 100:
+            leading_zero = '0'+str(count)
+        else:
+            leading_zero = str(count)
+        
+        save_file = 'run_' + leading_zero + '.csv'
+        fn = os.path.join(save_folder, save_file)
+            
+    passengers_df.to_csv(fn, index=False)
+    print("Saved Passenger Seating Dataframe:\n{}".format(fn))
+    return
+    
 
 
 
@@ -319,11 +341,18 @@ if __name__ == '__main__':
     # 2b. ANALYZE OFFSET FOR THIS CASE PROBLEM
     my_offset_info = analyze_offsets(my_plane, my_sd_offsets, default_offset, debug=DEBUG)
     
-    # 3. RANDOM PASSENGERS
-    #passengers_df = initialize_passengers(debug=DEBUG, passengers_booked=my_plane.booked_seats)
+    # 3. RANDOM PASSENGERS or import file
+    passengers_df = initialize_passengers(debug=DEBUG, passengers_booked=my_plane.booked_seats)
+
+    # 4. Start Seating Group Passengers
+    passengers_df = AssignSeating(my_plane, passengers_df, my_offset_info, debug=DEBUG)
+    
+    # 5. Save CSV results
+    save_results(passengers_df, my_plane, LOCAL_REPO_DIR)
+    
+    print("DONE")
 
     
-    # 3. Start Seating Group Passengers
     
     
     

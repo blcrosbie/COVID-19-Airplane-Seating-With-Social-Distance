@@ -29,5 +29,5 @@ class Passenger:
             print("OK")
             
     def __del__(self):
-        print('\n')
+        pass
         
