@@ -1,4 +1,4 @@
 .env
 secrets/
-src/find_seating.py
+src/find_seats.py
 
