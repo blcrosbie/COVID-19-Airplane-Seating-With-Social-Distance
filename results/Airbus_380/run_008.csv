@@ -1,0 +1,271 @@
+pID,age,group_size,group,has_travelled,has_preexisting_condition,number_of_flags,seat,offset_order,offset_x,offset_y,offset_method
+8d06a38b-06da-4df0-8f06-4351fbd5066b,55,7,"[UUID('a16fca93-8404-4769-a34e-1b5a2fa46c46'), UUID('6f40c5a0-f4de-4797-b2c3-03711887576b'), UUID('4d8da61f-fc6e-47c1-965d-1e91ca37c33f'), UUID('22d8132b-235b-4c03-81b8-5909a700ad88'), UUID('20c1d8ed-6dc1-4d96-99ae-88ee6b1756f4'), UUID('b0bbcea4-7afd-4893-afc9-f955fc2a8922'), UUID('8d06a38b-06da-4df0-8f06-4351fbd5066b')]",True,False,1,83A,5,0,0,cardinal_only
+bc71cf1c-d753-43cd-b2e1-c3cb0d71ea6b,41,7,"[UUID('89d16636-a398-44f9-ae13-61594f445546'), UUID('76dcdde2-e410-4732-87d8-7a871e4f32d8'), UUID('1b87131b-7c04-403f-a351-0bb16a0a80dd'), UUID('d665ba70-95b3-4eb2-9f50-a43b1d50cf35'), UUID('0fbb1781-6ed6-440e-aa75-7e76a3d0a553'), UUID('1352649a-ac0b-4869-86d2-8998d04e604d'), UUID('bc71cf1c-d753-43cd-b2e1-c3cb0d71ea6b')]",False,False,0,79C,5,0,0,cardinal_only
+1352649a-ac0b-4869-86d2-8998d04e604d,39,7,"[UUID('89d16636-a398-44f9-ae13-61594f445546'), UUID('76dcdde2-e410-4732-87d8-7a871e4f32d8'), UUID('1b87131b-7c04-403f-a351-0bb16a0a80dd'), UUID('d665ba70-95b3-4eb2-9f50-a43b1d50cf35'), UUID('0fbb1781-6ed6-440e-aa75-7e76a3d0a553'), UUID('1352649a-ac0b-4869-86d2-8998d04e604d'), UUID('bc71cf1c-d753-43cd-b2e1-c3cb0d71ea6b')]",False,False,0,78A,5,0,0,cardinal_only
+b0bbcea4-7afd-4893-afc9-f955fc2a8922,37,7,"[UUID('a16fca93-8404-4769-a34e-1b5a2fa46c46'), UUID('6f40c5a0-f4de-4797-b2c3-03711887576b'), UUID('4d8da61f-fc6e-47c1-965d-1e91ca37c33f'), UUID('22d8132b-235b-4c03-81b8-5909a700ad88'), UUID('20c1d8ed-6dc1-4d96-99ae-88ee6b1756f4'), UUID('b0bbcea4-7afd-4893-afc9-f955fc2a8922'), UUID('8d06a38b-06da-4df0-8f06-4351fbd5066b')]",True,False,1,83B,5,0,0,cardinal_only
+6f40c5a0-f4de-4797-b2c3-03711887576b,36,7,"[UUID('a16fca93-8404-4769-a34e-1b5a2fa46c46'), UUID('6f40c5a0-f4de-4797-b2c3-03711887576b'), UUID('4d8da61f-fc6e-47c1-965d-1e91ca37c33f'), UUID('22d8132b-235b-4c03-81b8-5909a700ad88'), UUID('20c1d8ed-6dc1-4d96-99ae-88ee6b1756f4'), UUID('b0bbcea4-7afd-4893-afc9-f955fc2a8922'), UUID('8d06a38b-06da-4df0-8f06-4351fbd5066b')]",False,True,1,83C,2,1,1,full_block
+4d8da61f-fc6e-47c1-965d-1e91ca37c33f,34,7,"[UUID('a16fca93-8404-4769-a34e-1b5a2fa46c46'), UUID('6f40c5a0-f4de-4797-b2c3-03711887576b'), UUID('4d8da61f-fc6e-47c1-965d-1e91ca37c33f'), UUID('22d8132b-235b-4c03-81b8-5909a700ad88'), UUID('20c1d8ed-6dc1-4d96-99ae-88ee6b1756f4'), UUID('b0bbcea4-7afd-4893-afc9-f955fc2a8922'), UUID('8d06a38b-06da-4df0-8f06-4351fbd5066b')]",False,False,0,82C,5,0,0,cardinal_only
+89d16636-a398-44f9-ae13-61594f445546,34,7,"[UUID('89d16636-a398-44f9-ae13-61594f445546'), UUID('76dcdde2-e410-4732-87d8-7a871e4f32d8'), UUID('1b87131b-7c04-403f-a351-0bb16a0a80dd'), UUID('d665ba70-95b3-4eb2-9f50-a43b1d50cf35'), UUID('0fbb1781-6ed6-440e-aa75-7e76a3d0a553'), UUID('1352649a-ac0b-4869-86d2-8998d04e604d'), UUID('bc71cf1c-d753-43cd-b2e1-c3cb0d71ea6b')]",True,False,1,81B,5,0,0,cardinal_only
+76dcdde2-e410-4732-87d8-7a871e4f32d8,34,7,"[UUID('89d16636-a398-44f9-ae13-61594f445546'), UUID('76dcdde2-e410-4732-87d8-7a871e4f32d8'), UUID('1b87131b-7c04-403f-a351-0bb16a0a80dd'), UUID('d665ba70-95b3-4eb2-9f50-a43b1d50cf35'), UUID('0fbb1781-6ed6-440e-aa75-7e76a3d0a553'), UUID('1352649a-ac0b-4869-86d2-8998d04e604d'), UUID('bc71cf1c-d753-43cd-b2e1-c3cb0d71ea6b')]",False,False,0,78B,5,0,0,cardinal_only
+a16fca93-8404-4769-a34e-1b5a2fa46c46,31,7,"[UUID('a16fca93-8404-4769-a34e-1b5a2fa46c46'), UUID('6f40c5a0-f4de-4797-b2c3-03711887576b'), UUID('4d8da61f-fc6e-47c1-965d-1e91ca37c33f'), UUID('22d8132b-235b-4c03-81b8-5909a700ad88'), UUID('20c1d8ed-6dc1-4d96-99ae-88ee6b1756f4'), UUID('b0bbcea4-7afd-4893-afc9-f955fc2a8922'), UUID('8d06a38b-06da-4df0-8f06-4351fbd5066b')]",True,False,1,82A,5,0,0,cardinal_only
+22d8132b-235b-4c03-81b8-5909a700ad88,31,7,"[UUID('a16fca93-8404-4769-a34e-1b5a2fa46c46'), UUID('6f40c5a0-f4de-4797-b2c3-03711887576b'), UUID('4d8da61f-fc6e-47c1-965d-1e91ca37c33f'), UUID('22d8132b-235b-4c03-81b8-5909a700ad88'), UUID('20c1d8ed-6dc1-4d96-99ae-88ee6b1756f4'), UUID('b0bbcea4-7afd-4893-afc9-f955fc2a8922'), UUID('8d06a38b-06da-4df0-8f06-4351fbd5066b')]",False,False,0,81A,5,0,0,cardinal_only
+0fbb1781-6ed6-440e-aa75-7e76a3d0a553,30,7,"[UUID('89d16636-a398-44f9-ae13-61594f445546'), UUID('76dcdde2-e410-4732-87d8-7a871e4f32d8'), UUID('1b87131b-7c04-403f-a351-0bb16a0a80dd'), UUID('d665ba70-95b3-4eb2-9f50-a43b1d50cf35'), UUID('0fbb1781-6ed6-440e-aa75-7e76a3d0a553'), UUID('1352649a-ac0b-4869-86d2-8998d04e604d'), UUID('bc71cf1c-d753-43cd-b2e1-c3cb0d71ea6b')]",False,True,1,80C,2,1,1,full_block
+20c1d8ed-6dc1-4d96-99ae-88ee6b1756f4,29,7,"[UUID('a16fca93-8404-4769-a34e-1b5a2fa46c46'), UUID('6f40c5a0-f4de-4797-b2c3-03711887576b'), UUID('4d8da61f-fc6e-47c1-965d-1e91ca37c33f'), UUID('22d8132b-235b-4c03-81b8-5909a700ad88'), UUID('20c1d8ed-6dc1-4d96-99ae-88ee6b1756f4'), UUID('b0bbcea4-7afd-4893-afc9-f955fc2a8922'), UUID('8d06a38b-06da-4df0-8f06-4351fbd5066b')]",True,False,1,82B,5,0,0,cardinal_only
+1b87131b-7c04-403f-a351-0bb16a0a80dd,29,7,"[UUID('89d16636-a398-44f9-ae13-61594f445546'), UUID('76dcdde2-e410-4732-87d8-7a871e4f32d8'), UUID('1b87131b-7c04-403f-a351-0bb16a0a80dd'), UUID('d665ba70-95b3-4eb2-9f50-a43b1d50cf35'), UUID('0fbb1781-6ed6-440e-aa75-7e76a3d0a553'), UUID('1352649a-ac0b-4869-86d2-8998d04e604d'), UUID('bc71cf1c-d753-43cd-b2e1-c3cb0d71ea6b')]",True,False,1,79A,5,0,0,cardinal_only
+d665ba70-95b3-4eb2-9f50-a43b1d50cf35,27,7,"[UUID('89d16636-a398-44f9-ae13-61594f445546'), UUID('76dcdde2-e410-4732-87d8-7a871e4f32d8'), UUID('1b87131b-7c04-403f-a351-0bb16a0a80dd'), UUID('d665ba70-95b3-4eb2-9f50-a43b1d50cf35'), UUID('0fbb1781-6ed6-440e-aa75-7e76a3d0a553'), UUID('1352649a-ac0b-4869-86d2-8998d04e604d'), UUID('bc71cf1c-d753-43cd-b2e1-c3cb0d71ea6b')]",True,False,1,79B,5,0,0,cardinal_only
+fa16fc2f-851c-46e1-af62-ed1ca041bc22,37,6,"[UUID('a22b909a-04b6-44b1-806c-606dfbc65238'), UUID('2f9e3413-a88f-4446-9383-13958f35b627'), UUID('fa16fc2f-851c-46e1-af62-ed1ca041bc22'), UUID('e7a6045b-0e0c-44f5-a087-b32757982593'), UUID('6a8677e1-d4cc-41c2-a2a0-ed341cc156c9'), UUID('2c74bbbe-87b1-4c89-ad47-dcf1ab685ddd')]",False,True,1,76A,2,1,1,full_block
+2f9e3413-a88f-4446-9383-13958f35b627,33,6,"[UUID('a22b909a-04b6-44b1-806c-606dfbc65238'), UUID('2f9e3413-a88f-4446-9383-13958f35b627'), UUID('fa16fc2f-851c-46e1-af62-ed1ca041bc22'), UUID('e7a6045b-0e0c-44f5-a087-b32757982593'), UUID('6a8677e1-d4cc-41c2-a2a0-ed341cc156c9'), UUID('2c74bbbe-87b1-4c89-ad47-dcf1ab685ddd')]",True,False,1,76B,5,0,0,cardinal_only
+6a8677e1-d4cc-41c2-a2a0-ed341cc156c9,33,6,"[UUID('a22b909a-04b6-44b1-806c-606dfbc65238'), UUID('2f9e3413-a88f-4446-9383-13958f35b627'), UUID('fa16fc2f-851c-46e1-af62-ed1ca041bc22'), UUID('e7a6045b-0e0c-44f5-a087-b32757982593'), UUID('6a8677e1-d4cc-41c2-a2a0-ed341cc156c9'), UUID('2c74bbbe-87b1-4c89-ad47-dcf1ab685ddd')]",False,False,0,75A,5,0,0,cardinal_only
+a22b909a-04b6-44b1-806c-606dfbc65238,29,6,"[UUID('a22b909a-04b6-44b1-806c-606dfbc65238'), UUID('2f9e3413-a88f-4446-9383-13958f35b627'), UUID('fa16fc2f-851c-46e1-af62-ed1ca041bc22'), UUID('e7a6045b-0e0c-44f5-a087-b32757982593'), UUID('6a8677e1-d4cc-41c2-a2a0-ed341cc156c9'), UUID('2c74bbbe-87b1-4c89-ad47-dcf1ab685ddd')]",False,False,0,75B,5,0,0,cardinal_only
+e7a6045b-0e0c-44f5-a087-b32757982593,26,6,"[UUID('a22b909a-04b6-44b1-806c-606dfbc65238'), UUID('2f9e3413-a88f-4446-9383-13958f35b627'), UUID('fa16fc2f-851c-46e1-af62-ed1ca041bc22'), UUID('e7a6045b-0e0c-44f5-a087-b32757982593'), UUID('6a8677e1-d4cc-41c2-a2a0-ed341cc156c9'), UUID('2c74bbbe-87b1-4c89-ad47-dcf1ab685ddd')]",True,False,1,76C,5,0,0,cardinal_only
+2c74bbbe-87b1-4c89-ad47-dcf1ab685ddd,26,6,"[UUID('a22b909a-04b6-44b1-806c-606dfbc65238'), UUID('2f9e3413-a88f-4446-9383-13958f35b627'), UUID('fa16fc2f-851c-46e1-af62-ed1ca041bc22'), UUID('e7a6045b-0e0c-44f5-a087-b32757982593'), UUID('6a8677e1-d4cc-41c2-a2a0-ed341cc156c9'), UUID('2c74bbbe-87b1-4c89-ad47-dcf1ab685ddd')]",False,False,0,75C,5,0,0,cardinal_only
+845d31b6-1146-42ce-a07f-a4e2bd595c3e,43,5,"[UUID('5e9d4dbd-8ebc-4382-ab20-210536d83e72'), UUID('3f4ca99c-9826-4e9f-a237-e158718852bf'), UUID('845d31b6-1146-42ce-a07f-a4e2bd595c3e'), UUID('85191216-22d1-4cfe-9605-56d86a850729'), UUID('ceb82f03-13a8-4904-af4f-bf3e162150d8')]",True,False,1,74A,5,0,0,cardinal_only
+5e9d4dbd-8ebc-4382-ab20-210536d83e72,30,5,"[UUID('5e9d4dbd-8ebc-4382-ab20-210536d83e72'), UUID('3f4ca99c-9826-4e9f-a237-e158718852bf'), UUID('845d31b6-1146-42ce-a07f-a4e2bd595c3e'), UUID('85191216-22d1-4cfe-9605-56d86a850729'), UUID('ceb82f03-13a8-4904-af4f-bf3e162150d8')]",False,False,0,72A,5,0,0,cardinal_only
+ceb82f03-13a8-4904-af4f-bf3e162150d8,26,5,"[UUID('5e9d4dbd-8ebc-4382-ab20-210536d83e72'), UUID('3f4ca99c-9826-4e9f-a237-e158718852bf'), UUID('845d31b6-1146-42ce-a07f-a4e2bd595c3e'), UUID('85191216-22d1-4cfe-9605-56d86a850729'), UUID('ceb82f03-13a8-4904-af4f-bf3e162150d8')]",False,True,1,73A,2,1,1,full_block
+3f4ca99c-9826-4e9f-a237-e158718852bf,24,5,"[UUID('5e9d4dbd-8ebc-4382-ab20-210536d83e72'), UUID('3f4ca99c-9826-4e9f-a237-e158718852bf'), UUID('845d31b6-1146-42ce-a07f-a4e2bd595c3e'), UUID('85191216-22d1-4cfe-9605-56d86a850729'), UUID('ceb82f03-13a8-4904-af4f-bf3e162150d8')]",True,False,1,73B,5,0,0,cardinal_only
+85191216-22d1-4cfe-9605-56d86a850729,10,5,"[UUID('5e9d4dbd-8ebc-4382-ab20-210536d83e72'), UUID('3f4ca99c-9826-4e9f-a237-e158718852bf'), UUID('845d31b6-1146-42ce-a07f-a4e2bd595c3e'), UUID('85191216-22d1-4cfe-9605-56d86a850729'), UUID('ceb82f03-13a8-4904-af4f-bf3e162150d8')]",True,False,1,73C,5,0,0,cardinal_only
+98119067-e523-4186-858e-869b112780ea,47,4,"[UUID('fd1a71c2-0d73-4d42-b28e-87a9072ccb95'), UUID('a39a9d46-dcb8-4378-b65a-e349343c9a94'), UUID('b02bc489-ea38-4d29-967b-8d4e2cc289de'), UUID('98119067-e523-4186-858e-869b112780ea')]",True,False,1,72C,5,0,0,cardinal_only
+fd1a71c2-0d73-4d42-b28e-87a9072ccb95,46,4,"[UUID('fd1a71c2-0d73-4d42-b28e-87a9072ccb95'), UUID('a39a9d46-dcb8-4378-b65a-e349343c9a94'), UUID('b02bc489-ea38-4d29-967b-8d4e2cc289de'), UUID('98119067-e523-4186-858e-869b112780ea')]",False,False,0,71B,5,0,0,cardinal_only
+dc81b903-46d0-424f-b85f-110b2355bf57,46,4,"[UUID('dc81b903-46d0-424f-b85f-110b2355bf57'), UUID('04b8d4f7-60ab-44fc-8a5a-832348b354fa'), UUID('fb6a31d5-7cee-45e2-85be-7e4d735c3c62'), UUID('c8ebfe6b-6d4c-4a2d-8162-1b70dafef561')]",True,False,1,70A,5,0,0,cardinal_only
+a7fdf976-99d2-47a6-a074-7bd52028481e,45,4,"[UUID('a7fdf976-99d2-47a6-a074-7bd52028481e'), UUID('fb94aa4f-f1ce-4f87-9c08-746554bcb971'), UUID('126667a5-c143-4621-9efc-eee05deab951'), UUID('0d0fb4a9-b983-4234-91da-2cf3ac8a091e')]",False,False,0,69C,5,0,0,cardinal_only
+b806b826-2b7d-4cdb-9c59-5f938a39e755,43,4,"[UUID('09a097f2-2091-455b-abf3-af3d53609dcd'), UUID('d48cd997-5edf-44c5-82db-77d369d71aca'), UUID('b806b826-2b7d-4cdb-9c59-5f938a39e755'), UUID('a3e243da-11c0-45ff-9ec2-a5cbdafb748a')]",False,False,0,67A,5,0,0,cardinal_only
+fb6a31d5-7cee-45e2-85be-7e4d735c3c62,42,4,"[UUID('dc81b903-46d0-424f-b85f-110b2355bf57'), UUID('04b8d4f7-60ab-44fc-8a5a-832348b354fa'), UUID('fb6a31d5-7cee-45e2-85be-7e4d735c3c62'), UUID('c8ebfe6b-6d4c-4a2d-8162-1b70dafef561')]",False,False,0,70B,5,0,0,cardinal_only
+04b8d4f7-60ab-44fc-8a5a-832348b354fa,41,4,"[UUID('dc81b903-46d0-424f-b85f-110b2355bf57'), UUID('04b8d4f7-60ab-44fc-8a5a-832348b354fa'), UUID('fb6a31d5-7cee-45e2-85be-7e4d735c3c62'), UUID('c8ebfe6b-6d4c-4a2d-8162-1b70dafef561')]",False,False,0,70C,5,0,0,cardinal_only
+c8ebfe6b-6d4c-4a2d-8162-1b70dafef561,39,4,"[UUID('dc81b903-46d0-424f-b85f-110b2355bf57'), UUID('04b8d4f7-60ab-44fc-8a5a-832348b354fa'), UUID('fb6a31d5-7cee-45e2-85be-7e4d735c3c62'), UUID('c8ebfe6b-6d4c-4a2d-8162-1b70dafef561')]",False,False,0,69A,5,0,0,cardinal_only
+b02bc489-ea38-4d29-967b-8d4e2cc289de,38,4,"[UUID('fd1a71c2-0d73-4d42-b28e-87a9072ccb95'), UUID('a39a9d46-dcb8-4378-b65a-e349343c9a94'), UUID('b02bc489-ea38-4d29-967b-8d4e2cc289de'), UUID('98119067-e523-4186-858e-869b112780ea')]",False,False,0,71C,5,0,0,cardinal_only
+fb94aa4f-f1ce-4f87-9c08-746554bcb971,36,4,"[UUID('a7fdf976-99d2-47a6-a074-7bd52028481e'), UUID('fb94aa4f-f1ce-4f87-9c08-746554bcb971'), UUID('126667a5-c143-4621-9efc-eee05deab951'), UUID('0d0fb4a9-b983-4234-91da-2cf3ac8a091e')]",True,False,1,69B,5,0,0,cardinal_only
+0d0fb4a9-b983-4234-91da-2cf3ac8a091e,36,4,"[UUID('a7fdf976-99d2-47a6-a074-7bd52028481e'), UUID('fb94aa4f-f1ce-4f87-9c08-746554bcb971'), UUID('126667a5-c143-4621-9efc-eee05deab951'), UUID('0d0fb4a9-b983-4234-91da-2cf3ac8a091e')]",False,False,0,68A,5,0,0,cardinal_only
+09a097f2-2091-455b-abf3-af3d53609dcd,35,4,"[UUID('09a097f2-2091-455b-abf3-af3d53609dcd'), UUID('d48cd997-5edf-44c5-82db-77d369d71aca'), UUID('b806b826-2b7d-4cdb-9c59-5f938a39e755'), UUID('a3e243da-11c0-45ff-9ec2-a5cbdafb748a')]",True,False,1,68C,5,0,0,cardinal_only
+a3e243da-11c0-45ff-9ec2-a5cbdafb748a,33,4,"[UUID('09a097f2-2091-455b-abf3-af3d53609dcd'), UUID('d48cd997-5edf-44c5-82db-77d369d71aca'), UUID('b806b826-2b7d-4cdb-9c59-5f938a39e755'), UUID('a3e243da-11c0-45ff-9ec2-a5cbdafb748a')]",False,False,0,67B,5,0,0,cardinal_only
+126667a5-c143-4621-9efc-eee05deab951,30,4,"[UUID('a7fdf976-99d2-47a6-a074-7bd52028481e'), UUID('fb94aa4f-f1ce-4f87-9c08-746554bcb971'), UUID('126667a5-c143-4621-9efc-eee05deab951'), UUID('0d0fb4a9-b983-4234-91da-2cf3ac8a091e')]",False,False,0,68B,5,0,0,cardinal_only
+d48cd997-5edf-44c5-82db-77d369d71aca,26,4,"[UUID('09a097f2-2091-455b-abf3-af3d53609dcd'), UUID('d48cd997-5edf-44c5-82db-77d369d71aca'), UUID('b806b826-2b7d-4cdb-9c59-5f938a39e755'), UUID('a3e243da-11c0-45ff-9ec2-a5cbdafb748a')]",False,False,0,67C,5,0,0,cardinal_only
+a39a9d46-dcb8-4378-b65a-e349343c9a94,22,4,"[UUID('fd1a71c2-0d73-4d42-b28e-87a9072ccb95'), UUID('a39a9d46-dcb8-4378-b65a-e349343c9a94'), UUID('b02bc489-ea38-4d29-967b-8d4e2cc289de'), UUID('98119067-e523-4186-858e-869b112780ea')]",True,False,1,71A,5,0,0,cardinal_only
+dac548b1-bfab-4931-b28c-a7695bc15e54,47,3,"[UUID('43309ad8-caeb-4114-aebb-a7377e05d1b8'), UUID('9d073013-ac64-467c-9738-2026a965a045'), UUID('dac548b1-bfab-4931-b28c-a7695bc15e54')]",True,False,1,66A,5,0,0,cardinal_only
+9d073013-ac64-467c-9738-2026a965a045,45,3,"[UUID('43309ad8-caeb-4114-aebb-a7377e05d1b8'), UUID('9d073013-ac64-467c-9738-2026a965a045'), UUID('dac548b1-bfab-4931-b28c-a7695bc15e54')]",False,True,1,65A,2,1,1,full_block
+2cffb02e-7cbc-487b-b112-c2f7b8ee5347,41,3,"[UUID('c3930a3a-c48b-4c8d-9346-85330dee4802'), UUID('2cffb02e-7cbc-487b-b112-c2f7b8ee5347'), UUID('d07bb137-9042-4262-8c8d-08b60fa75adc')]",False,True,1,63A,2,1,1,full_block
+8f4dbe08-4ef8-4e6c-af25-111c5eb0c0db,38,3,"[UUID('8f4dbe08-4ef8-4e6c-af25-111c5eb0c0db'), UUID('4faffe04-121d-4346-a977-34709b7ef81d'), UUID('3482d63a-57ae-4148-852e-30913f4172f3')]",False,False,0,61B,5,0,0,cardinal_only
+4faffe04-121d-4346-a977-34709b7ef81d,38,3,"[UUID('8f4dbe08-4ef8-4e6c-af25-111c5eb0c0db'), UUID('4faffe04-121d-4346-a977-34709b7ef81d'), UUID('3482d63a-57ae-4148-852e-30913f4172f3')]",False,False,0,61C,5,0,0,cardinal_only
+43309ad8-caeb-4114-aebb-a7377e05d1b8,33,3,"[UUID('43309ad8-caeb-4114-aebb-a7377e05d1b8'), UUID('9d073013-ac64-467c-9738-2026a965a045'), UUID('dac548b1-bfab-4931-b28c-a7695bc15e54')]",False,False,0,65B,5,0,0,cardinal_only
+51209cbb-93f8-4e5b-8d3c-ee727240d3a7,31,3,"[UUID('51209cbb-93f8-4e5b-8d3c-ee727240d3a7'), UUID('e9472301-bf34-4512-8b7e-c15e0ac747aa'), UUID('e98fe0fb-97ac-444f-b3b0-05d5b66c843a')]",False,False,0,60C,5,0,0,cardinal_only
+d07bb137-9042-4262-8c8d-08b60fa75adc,29,3,"[UUID('c3930a3a-c48b-4c8d-9346-85330dee4802'), UUID('2cffb02e-7cbc-487b-b112-c2f7b8ee5347'), UUID('d07bb137-9042-4262-8c8d-08b60fa75adc')]",True,False,1,63B,5,0,0,cardinal_only
+3482d63a-57ae-4148-852e-30913f4172f3,28,3,"[UUID('8f4dbe08-4ef8-4e6c-af25-111c5eb0c0db'), UUID('4faffe04-121d-4346-a977-34709b7ef81d'), UUID('3482d63a-57ae-4148-852e-30913f4172f3')]",True,True,2,61A,2,1,1,full_block
+e9472301-bf34-4512-8b7e-c15e0ac747aa,26,3,"[UUID('51209cbb-93f8-4e5b-8d3c-ee727240d3a7'), UUID('e9472301-bf34-4512-8b7e-c15e0ac747aa'), UUID('e98fe0fb-97ac-444f-b3b0-05d5b66c843a')]",False,False,0,59A,5,0,0,cardinal_only
+e98fe0fb-97ac-444f-b3b0-05d5b66c843a,24,3,"[UUID('51209cbb-93f8-4e5b-8d3c-ee727240d3a7'), UUID('e9472301-bf34-4512-8b7e-c15e0ac747aa'), UUID('e98fe0fb-97ac-444f-b3b0-05d5b66c843a')]",False,False,0,59B,5,0,0,cardinal_only
+c3930a3a-c48b-4c8d-9346-85330dee4802,23,3,"[UUID('c3930a3a-c48b-4c8d-9346-85330dee4802'), UUID('2cffb02e-7cbc-487b-b112-c2f7b8ee5347'), UUID('d07bb137-9042-4262-8c8d-08b60fa75adc')]",True,False,1,63C,5,0,0,cardinal_only
+08488097-589c-476b-bf11-a2fccd23fe2c,63,2,"[UUID('0340af3a-7640-4fef-944b-147a3d57b045'), UUID('08488097-589c-476b-bf11-a2fccd23fe2c')]",False,True,1,57A,2,1,1,full_block
+d375b4ea-cd35-4bc4-bd79-a14310c3026f,52,2,"[UUID('d375b4ea-cd35-4bc4-bd79-a14310c3026f'), UUID('35379de3-4b90-42fb-ba36-ec8e0202ee5f')]",False,False,0,56C,5,0,0,cardinal_only
+b873a9ea-da71-4af0-9b82-d5fe655457f2,50,2,"[UUID('b873a9ea-da71-4af0-9b82-d5fe655457f2'), UUID('0a2b467c-59d2-408f-ae66-ece5812dc65b')]",False,True,1,55A,2,1,1,full_block
+79381f96-ee8c-4b40-ad42-0bfb3e418a38,50,2,"[UUID('b89aba8f-766f-4fe9-9ea7-0263d55804dd'), UUID('79381f96-ee8c-4b40-ad42-0bfb3e418a38')]",False,False,0,55C,5,0,0,cardinal_only
+4aac0881-a73b-4cc8-abba-92c96a3f26e7,47,2,"[UUID('4aac0881-a73b-4cc8-abba-92c96a3f26e7'), UUID('461b7549-3e1e-4cd8-b440-68a334da06cf')]",False,False,0,53A,5,0,0,cardinal_only
+e0262667-a1b4-49a1-80db-43d093dde32c,47,2,"[UUID('46e89776-1b15-47eb-a754-ddcb42aa24fb'), UUID('e0262667-a1b4-49a1-80db-43d093dde32c')]",False,False,0,53C,5,0,0,cardinal_only
+50fff1cb-0803-4c29-be1d-41b8b4418690,47,2,"[UUID('50fff1cb-0803-4c29-be1d-41b8b4418690'), UUID('e2683370-00b1-4271-9f97-1465172b3a52')]",False,False,0,52B,5,0,0,cardinal_only
+c3a68f21-ae90-44dc-a39a-698ae7cd71d1,46,2,"[UUID('c3a68f21-ae90-44dc-a39a-698ae7cd71d1'), UUID('e5c38c9f-fa78-4fdd-8596-881cf851ee24')]",True,False,1,51A,5,0,0,cardinal_only
+e6e25e33-c513-4e6a-bf7f-663f20df1a72,44,2,"[UUID('62d6f5c1-e6ad-48d0-b9ec-3aac7371eb71'), UUID('e6e25e33-c513-4e6a-bf7f-663f20df1a72')]",False,False,0,50A,5,0,0,cardinal_only
+8f14f14e-fffc-425d-9d90-44826f065d07,43,2,"[UUID('812de674-6cb3-4c30-b53c-355b4e88500a'), UUID('8f14f14e-fffc-425d-9d90-44826f065d07')]",False,True,1,49C,2,1,1,full_block
+3c7f1c0c-32fd-4d53-8edb-2c3445cb4caf,43,2,"[UUID('fbd503ba-f256-4ebb-845b-ad285df9fbe2'), UUID('3c7f1c0c-32fd-4d53-8edb-2c3445cb4caf')]",False,False,0,47B,5,0,0,cardinal_only
+2edae68e-6a8b-4293-9c52-f9725446b63f,43,2,"[UUID('2de8cd1c-adf4-482a-bc5c-d7a7085df2a0'), UUID('2edae68e-6a8b-4293-9c52-f9725446b63f')]",True,True,2,45A,2,1,1,full_block
+0ecbba0d-6e04-4981-8f3c-baee29d73da5,41,2,"[UUID('0ecbba0d-6e04-4981-8f3c-baee29d73da5'), UUID('e3b1a314-b409-47c2-b406-32c64a95a8e7')]",True,True,2,43A,2,1,1,full_block
+bb689d8d-4957-4e27-93f7-9c777b437dba,41,2,"[UUID('bb689d8d-4957-4e27-93f7-9c777b437dba'), UUID('4a2d7783-4dfe-4bf4-8b81-de24a500bc42')]",False,False,0,83E,5,0,0,cardinal_only
+ece089e8-1f3e-4425-b512-062f1671b0ce,41,2,"[UUID('0df462c0-25c0-409e-9c2f-07192f1ee797'), UUID('ece089e8-1f3e-4425-b512-062f1671b0ce')]",False,True,1,83G,2,1,1,full_block
+104fdfd9-e0d4-4e8c-b7e2-468bd3fd5f79,40,2,"[UUID('104fdfd9-e0d4-4e8c-b7e2-468bd3fd5f79'), UUID('1f9635a9-fd8e-4a1a-bffe-cc2a49498fc2')]",True,False,1,81D,5,0,0,cardinal_only
+0a2b467c-59d2-408f-ae66-ece5812dc65b,40,2,"[UUID('b873a9ea-da71-4af0-9b82-d5fe655457f2'), UUID('0a2b467c-59d2-408f-ae66-ece5812dc65b')]",False,False,0,55B,5,0,0,cardinal_only
+812de674-6cb3-4c30-b53c-355b4e88500a,40,2,"[UUID('812de674-6cb3-4c30-b53c-355b4e88500a'), UUID('8f14f14e-fffc-425d-9d90-44826f065d07')]",False,False,0,48A,5,0,0,cardinal_only
+0340af3a-7640-4fef-944b-147a3d57b045,40,2,"[UUID('0340af3a-7640-4fef-944b-147a3d57b045'), UUID('08488097-589c-476b-bf11-a2fccd23fe2c')]",False,False,0,57B,5,0,0,cardinal_only
+e2683370-00b1-4271-9f97-1465172b3a52,40,2,"[UUID('50fff1cb-0803-4c29-be1d-41b8b4418690'), UUID('e2683370-00b1-4271-9f97-1465172b3a52')]",False,False,0,52C,5,0,0,cardinal_only
+73ee36e6-6f49-45de-8da3-9ea19b03cb41,39,2,"[UUID('00dd92f8-197c-4a55-aca1-b476f114656a'), UUID('73ee36e6-6f49-45de-8da3-9ea19b03cb41')]",False,False,0,81F,5,0,0,cardinal_only
+35379de3-4b90-42fb-ba36-ec8e0202ee5f,38,2,"[UUID('d375b4ea-cd35-4bc4-bd79-a14310c3026f'), UUID('35379de3-4b90-42fb-ba36-ec8e0202ee5f')]",True,False,1,57C,5,0,0,cardinal_only
+b89aba8f-766f-4fe9-9ea7-0263d55804dd,37,2,"[UUID('b89aba8f-766f-4fe9-9ea7-0263d55804dd'), UUID('79381f96-ee8c-4b40-ad42-0bfb3e418a38')]",False,False,0,54C,5,0,0,cardinal_only
+f0aa0402-8b9b-4f71-8ca2-6c4aa22fa26c,36,2,"[UUID('f0aa0402-8b9b-4f71-8ca2-6c4aa22fa26c'), UUID('eb12fc6b-5c75-4aee-8ef8-fe22018e8e08')]",False,False,0,80D,5,0,0,cardinal_only
+00dd92f8-197c-4a55-aca1-b476f114656a,35,2,"[UUID('00dd92f8-197c-4a55-aca1-b476f114656a'), UUID('73ee36e6-6f49-45de-8da3-9ea19b03cb41')]",False,False,0,81G,5,0,0,cardinal_only
+eb12fc6b-5c75-4aee-8ef8-fe22018e8e08,34,2,"[UUID('f0aa0402-8b9b-4f71-8ca2-6c4aa22fa26c'), UUID('eb12fc6b-5c75-4aee-8ef8-fe22018e8e08')]",False,False,0,80E,5,0,0,cardinal_only
+46e89776-1b15-47eb-a754-ddcb42aa24fb,34,2,"[UUID('46e89776-1b15-47eb-a754-ddcb42aa24fb'), UUID('e0262667-a1b4-49a1-80db-43d093dde32c')]",False,False,0,52A,5,0,0,cardinal_only
+cc69261d-3d04-41b2-9917-0fdabb81fd60,33,2,"[UUID('f5c6ccdd-4a6b-4e60-98a2-7b40452c731a'), UUID('cc69261d-3d04-41b2-9917-0fdabb81fd60')]",False,False,0,80F,5,0,0,cardinal_only
+8b74fffc-ea71-4cf3-9614-88e6fbf6a829,33,2,"[UUID('8b74fffc-ea71-4cf3-9614-88e6fbf6a829'), UUID('e8f31869-0f02-4cdd-9874-98399eb93106')]",True,False,1,79D,5,0,0,cardinal_only
+e8f31869-0f02-4cdd-9874-98399eb93106,33,2,"[UUID('8b74fffc-ea71-4cf3-9614-88e6fbf6a829'), UUID('e8f31869-0f02-4cdd-9874-98399eb93106')]",True,False,1,79E,5,0,0,cardinal_only
+f5c6ccdd-4a6b-4e60-98a2-7b40452c731a,31,2,"[UUID('f5c6ccdd-4a6b-4e60-98a2-7b40452c731a'), UUID('cc69261d-3d04-41b2-9917-0fdabb81fd60')]",False,False,0,80G,5,0,0,cardinal_only
+e5c38c9f-fa78-4fdd-8596-881cf851ee24,30,2,"[UUID('c3a68f21-ae90-44dc-a39a-698ae7cd71d1'), UUID('e5c38c9f-fa78-4fdd-8596-881cf851ee24')]",True,False,1,51B,5,0,0,cardinal_only
+c95a0675-4be8-4176-a3a2-26e33699ab3b,28,2,"[UUID('3a315711-9a08-486c-85cf-04d126686114'), UUID('c95a0675-4be8-4176-a3a2-26e33699ab3b')]",True,False,1,79F,5,0,0,cardinal_only
+22afaef9-17b7-4fb1-86dd-27b90fecff42,27,2,"[UUID('22afaef9-17b7-4fb1-86dd-27b90fecff42'), UUID('6b85a695-5ce4-4b7f-a8d4-fd6baa251bfa')]",False,False,0,78D,5,0,0,cardinal_only
+6b85a695-5ce4-4b7f-a8d4-fd6baa251bfa,27,2,"[UUID('22afaef9-17b7-4fb1-86dd-27b90fecff42'), UUID('6b85a695-5ce4-4b7f-a8d4-fd6baa251bfa')]",False,False,0,78E,5,0,0,cardinal_only
+461b7549-3e1e-4cd8-b440-68a334da06cf,25,2,"[UUID('4aac0881-a73b-4cc8-abba-92c96a3f26e7'), UUID('461b7549-3e1e-4cd8-b440-68a334da06cf')]",False,False,0,53B,5,0,0,cardinal_only
+fbd503ba-f256-4ebb-845b-ad285df9fbe2,24,2,"[UUID('fbd503ba-f256-4ebb-845b-ad285df9fbe2'), UUID('3c7f1c0c-32fd-4d53-8edb-2c3445cb4caf')]",True,False,1,47A,5,0,0,cardinal_only
+e3b1a314-b409-47c2-b406-32c64a95a8e7,24,2,"[UUID('0ecbba0d-6e04-4981-8f3c-baee29d73da5'), UUID('e3b1a314-b409-47c2-b406-32c64a95a8e7')]",True,True,2,43B,2,1,1,full_block
+2de8cd1c-adf4-482a-bc5c-d7a7085df2a0,24,2,"[UUID('2de8cd1c-adf4-482a-bc5c-d7a7085df2a0'), UUID('2edae68e-6a8b-4293-9c52-f9725446b63f')]",True,False,1,45B,5,0,0,cardinal_only
+f70ba826-bd69-45c6-8bf5-1e3b4725f68a,24,2,"[UUID('f70ba826-bd69-45c6-8bf5-1e3b4725f68a'), UUID('19af877e-1abe-4edd-bd78-cdeac036c175')]",False,False,0,78F,5,0,0,cardinal_only
+a0d4622b-b596-441b-a2eb-aee63fe7e21e,23,2,"[UUID('c5319495-5f56-4571-938c-699deb452de6'), UUID('a0d4622b-b596-441b-a2eb-aee63fe7e21e')]",False,False,0,76E,5,0,0,cardinal_only
+8ad0b48c-7d62-4fae-b7ae-d34c5c2ba93b,22,2,"[UUID('344d0375-d049-4d5e-8e6a-5196d11b6cd3'), UUID('8ad0b48c-7d62-4fae-b7ae-d34c5c2ba93b')]",True,False,1,76F,5,0,0,cardinal_only
+c5319495-5f56-4571-938c-699deb452de6,22,2,"[UUID('c5319495-5f56-4571-938c-699deb452de6'), UUID('a0d4622b-b596-441b-a2eb-aee63fe7e21e')]",True,True,2,76D,2,1,1,full_block
+4a2d7783-4dfe-4bf4-8b81-de24a500bc42,20,2,"[UUID('bb689d8d-4957-4e27-93f7-9c777b437dba'), UUID('4a2d7783-4dfe-4bf4-8b81-de24a500bc42')]",True,True,2,83D,2,1,1,full_block
+7689b1c7-002d-415b-abf7-d02531b57d4a,19,2,"[UUID('6bfa26d1-0387-4658-a5f0-8fefd9533e86'), UUID('7689b1c7-002d-415b-abf7-d02531b57d4a')]",True,False,1,75F,5,0,0,cardinal_only
+70718e85-c0dd-47a0-8304-29a634aa440f,17,2,"[UUID('1d1ffd60-991c-4b43-99b6-549b617a9198'), UUID('70718e85-c0dd-47a0-8304-29a634aa440f')]",True,False,1,74D,5,0,0,cardinal_only
+62d6f5c1-e6ad-48d0-b9ec-3aac7371eb71,17,2,"[UUID('62d6f5c1-e6ad-48d0-b9ec-3aac7371eb71'), UUID('e6e25e33-c513-4e6a-bf7f-663f20df1a72')]",True,False,1,51C,5,0,0,cardinal_only
+b2520d3a-b20f-4627-b606-ec6f1a85de62,17,2,"[UUID('b2520d3a-b20f-4627-b606-ec6f1a85de62'), UUID('16a4e651-e224-45dd-beb5-96381bcde754')]",True,False,1,74F,5,0,0,cardinal_only
+1f9635a9-fd8e-4a1a-bffe-cc2a49498fc2,16,2,"[UUID('104fdfd9-e0d4-4e8c-b7e2-468bd3fd5f79'), UUID('1f9635a9-fd8e-4a1a-bffe-cc2a49498fc2')]",False,False,0,81E,5,0,0,cardinal_only
+1d1ffd60-991c-4b43-99b6-549b617a9198,16,2,"[UUID('1d1ffd60-991c-4b43-99b6-549b617a9198'), UUID('70718e85-c0dd-47a0-8304-29a634aa440f')]",False,False,0,74E,5,0,0,cardinal_only
+3a315711-9a08-486c-85cf-04d126686114,16,2,"[UUID('3a315711-9a08-486c-85cf-04d126686114'), UUID('c95a0675-4be8-4176-a3a2-26e33699ab3b')]",True,False,1,79G,5,0,0,cardinal_only
+0df462c0-25c0-409e-9c2f-07192f1ee797,16,2,"[UUID('0df462c0-25c0-409e-9c2f-07192f1ee797'), UUID('ece089e8-1f3e-4425-b512-062f1671b0ce')]",True,False,1,82F,5,0,0,cardinal_only
+6bfa26d1-0387-4658-a5f0-8fefd9533e86,14,2,"[UUID('6bfa26d1-0387-4658-a5f0-8fefd9533e86'), UUID('7689b1c7-002d-415b-abf7-d02531b57d4a')]",True,False,1,75G,5,0,0,cardinal_only
+344d0375-d049-4d5e-8e6a-5196d11b6cd3,13,2,"[UUID('344d0375-d049-4d5e-8e6a-5196d11b6cd3'), UUID('8ad0b48c-7d62-4fae-b7ae-d34c5c2ba93b')]",True,False,1,76G,5,0,0,cardinal_only
+19af877e-1abe-4edd-bd78-cdeac036c175,12,2,"[UUID('f70ba826-bd69-45c6-8bf5-1e3b4725f68a'), UUID('19af877e-1abe-4edd-bd78-cdeac036c175')]",False,False,0,78G,5,0,0,cardinal_only
+16a4e651-e224-45dd-beb5-96381bcde754,10,2,"[UUID('b2520d3a-b20f-4627-b606-ec6f1a85de62'), UUID('16a4e651-e224-45dd-beb5-96381bcde754')]",True,False,1,74G,5,0,0,cardinal_only
+193bc63a-fa54-44d2-8f37-272286fbd27b,72,1,[],False,True,1,75H,3,1,1,cardinal_only
+57692f89-ba43-47ea-bade-721da6b57f29,64,1,[],False,True,1,75K,3,1,1,cardinal_only
+77db6946-4bc5-4d3e-824a-745f18562742,61,1,[],False,True,1,74J,3,1,1,cardinal_only
+7b4efd24-95bd-4e22-869f-bb740a62eb6e,61,1,[],False,False,0,62H,5,0,0,cardinal_only
+8d8db7c6-3caf-4d4f-9fb6-66e5e74b901d,58,1,[],False,True,1,73H,3,1,1,cardinal_only
+fecd2ca5-8a3a-4dc9-a67e-9b543bca3cca,56,1,[],False,False,0,62J,5,0,0,cardinal_only
+6323b2e5-91db-489e-b9f2-aee8d538513a,54,1,[],False,False,0,62K,5,0,0,cardinal_only
+cb8909f0-c6eb-402c-96c0-edffb83620fd,52,1,[],False,False,0,61D,5,0,0,cardinal_only
+e892dfad-ed50-4dbc-832e-ae57eb5eef4d,51,1,[],True,False,1,80A,5,0,0,cardinal_only
+11f89d37-8c3c-4d91-bedc-12a70c911260,51,1,[],False,False,0,61E,5,0,0,cardinal_only
+00c9f970-7518-4287-8199-ff9341f1fff5,50,1,[],True,False,1,78C,5,0,0,cardinal_only
+5636ed90-e11e-48fe-b842-02184650a16f,50,1,[],True,True,2,83J,1,2,1,shaved_corners
+e45bf27b-4b86-47a1-bf8d-01d4c97993c5,50,1,[],False,False,0,61F,5,0,0,cardinal_only
+d6881683-980e-43de-9c40-2dcc7d1fadb8,50,1,[],True,False,1,77C,5,0,0,cardinal_only
+5cd93d5c-b640-43b4-aa15-654b3545a151,50,1,[],False,False,0,61G,5,0,0,cardinal_only
+a6ccee97-a83d-4693-8a74-0007d739e21a,49,1,[],False,False,0,61H,5,0,0,cardinal_only
+058d53d9-fe17-4832-a65e-7111e95d30fe,48,1,[],False,False,0,61J,5,0,0,cardinal_only
+bfb48579-aff6-41ca-9099-3b47f983a5fb,48,1,[],False,False,0,61K,5,0,0,cardinal_only
+8ba09475-d4b2-49a1-9c12-c084c7b2a905,48,1,[],False,True,1,73K,3,1,1,cardinal_only
+e9478217-6873-438a-b016-01e36967171d,48,1,[],False,False,0,60D,5,0,0,cardinal_only
+97d9cf1e-7cfc-4071-aa3f-c10c01fbe893,48,1,[],False,False,0,60E,5,0,0,cardinal_only
+b87428e4-ab91-4a99-9e82-353f589c68b3,48,1,[],False,False,0,60F,5,0,0,cardinal_only
+076ca724-0b14-4061-b1da-050d9abfd2a1,47,1,[],False,False,0,60G,5,0,0,cardinal_only
+30ffee97-99a6-4f93-9242-faf4d0018031,47,1,[],False,False,0,60H,5,0,0,cardinal_only
+e9e29a92-b685-413b-a49a-e95dfd212af3,47,1,[],True,False,1,77F,5,0,0,cardinal_only
+7e3ff061-566f-499f-9522-a4fa5f1d3ee4,47,1,[],True,False,1,77G,5,0,0,cardinal_only
+b892119f-6d17-4ea9-aaa4-5a7b2d64b142,46,1,[],False,False,0,60J,5,0,0,cardinal_only
+a400ab7a-8e60-483d-95c2-e505f70bcf89,46,1,[],False,False,0,60K,5,0,0,cardinal_only
+e30fda96-3d5a-4a76-a778-7ad791b4e6b9,46,1,[],True,False,1,74C,5,0,0,cardinal_only
+9dff1ce1-5b25-4108-9889-937901251e41,45,1,[],False,True,1,72D,3,1,1,cardinal_only
+75e73be0-b7b2-4f90-9d1a-553c435d0c55,45,1,[],True,True,2,81J,1,2,1,shaved_corners
+233af783-3835-48eb-9d6b-f9bf2fe51bd2,45,1,[],False,True,1,72F,3,1,1,cardinal_only
+bd719ae6-3fb7-4143-a162-4098d6a17e8a,44,1,[],False,False,0,59C,5,0,0,cardinal_only
+84432c0c-6100-438b-8b3d-6ac8694ce1fd,44,1,[],False,True,1,72J,3,1,1,cardinal_only
+b5ea19af-9e41-4336-9592-f9e08fffb303,44,1,[],False,False,0,59D,5,0,0,cardinal_only
+a7d56837-fc60-48ca-b6fb-90f092bc9fe1,44,1,[],False,False,0,59E,5,0,0,cardinal_only
+674cc761-4545-4dee-a705-082ecfd33810,44,1,[],False,False,0,59F,5,0,0,cardinal_only
+d63deb5c-792f-4bab-a0e0-bd827a031ac8,44,1,[],False,False,0,59G,5,0,0,cardinal_only
+e6bfb6ce-ad3d-46dc-b5be-7a708d129a9c,43,1,[],False,False,0,59H,5,0,0,cardinal_only
+a843b6d0-7aab-4591-ac26-c44cab8d950d,43,1,[],False,False,0,59J,5,0,0,cardinal_only
+405fe759-8636-4556-9381-c4394ab4b9e5,42,1,[],True,False,1,73E,5,0,0,cardinal_only
+e664275c-65f4-4f03-b9d0-6c6439d0c0ec,42,1,[],False,False,0,59K,5,0,0,cardinal_only
+0a9d7f6a-6ef6-46e8-b387-653b3416d16d,41,1,[],False,False,0,58C,5,0,0,cardinal_only
+5d57c96a-5663-4d89-be4f-0716d6193b8e,41,1,[],False,True,1,71E,3,1,1,cardinal_only
+2d3aa6ab-f33a-406e-988e-3d664b291bcb,41,1,[],False,False,0,58D,5,0,0,cardinal_only
+881cf271-ad92-44c5-a00e-11383b19a6d7,40,1,[],False,True,1,71G,3,1,1,cardinal_only
+8aaf82ac-17d8-4d25-8bef-6a277ff4056d,40,1,[],False,True,1,71H,3,1,1,cardinal_only
+e205721f-773a-422f-bcf5-5eb6dc0cd3b3,40,1,[],False,True,1,71K,3,1,1,cardinal_only
+0e49efd3-436b-49fd-ab64-edea491109fb,40,1,[],False,True,1,70D,3,1,1,cardinal_only
+735975fd-6ea8-4213-937f-0698363dbf81,40,1,[],False,False,0,58E,5,0,0,cardinal_only
+dc91fb4d-66b6-44b3-88f7-56080930a991,40,1,[],False,True,1,70F,3,1,1,cardinal_only
+cd431d67-9fcd-4965-ae84-561b7cec9a95,39,1,[],False,True,1,70J,3,1,1,cardinal_only
+d0ae33a3-a595-4709-8dd6-e771f821e41b,39,1,[],False,False,0,58F,5,0,0,cardinal_only
+0b7fed85-f884-4c52-8469-976fa3b07d50,38,1,[],False,False,0,58G,5,0,0,cardinal_only
+4c9305f0-4557-48f0-a80e-de824c19d294,38,1,[],False,True,1,69E,3,1,1,cardinal_only
+fffacffa-4a6c-4227-a379-6c1b6c77a819,38,1,[],False,False,0,58H,5,0,0,cardinal_only
+0559b693-8beb-48db-bc44-37d0ea3d38ea,38,1,[],False,False,0,58J,5,0,0,cardinal_only
+652c7d00-a51e-4fe2-bf85-94ac43eee7c9,38,1,[],False,False,0,58K,5,0,0,cardinal_only
+e97e0660-89d1-4493-9035-42adcaac1c1c,37,1,[],True,False,1,73G,5,0,0,cardinal_only
+fcdfd89b-b72b-4578-82d7-7f998222d3fa,37,1,[],True,True,2,79H,3,1,1,cardinal_only
+78801385-7bf6-4829-bf9d-61bd162b971e,37,1,[],False,False,0,57D,5,0,0,cardinal_only
+a5588ba9-c525-4012-8c95-b18a775dad4f,37,1,[],False,True,1,69G,3,1,1,cardinal_only
+1878a0c7-2b8c-46eb-8433-26cb920a6db7,37,1,[],False,True,1,69H,4,1,0,cardinal_only
+6c543c4f-69de-446b-bd21-de9fa8daec75,36,1,[],True,True,2,79K,3,1,1,cardinal_only
+bfd9aef8-f010-401f-b2b9-cdb0b065fbde,36,1,[],False,False,0,57E,5,0,0,cardinal_only
+5b807da0-aa81-4beb-a08e-c1f3c7fdfbba,36,1,[],False,False,0,57F,5,0,0,cardinal_only
+5a6973a2-801d-4ca6-a62b-11de60ec6980,36,1,[],True,False,1,69K,5,0,0,cardinal_only
+d71f2b22-0a40-4834-bca8-c625d1b7f37a,36,1,[],False,False,0,57G,5,0,0,cardinal_only
+1f70a613-2913-4e4d-bc78-87940081ec69,35,1,[],True,True,2,78J,3,1,1,cardinal_only
+e62d5622-f156-4fc4-8afb-94e2616c0b5b,35,1,[],False,False,0,57H,5,0,0,cardinal_only
+91a3c23e-7687-4465-a3be-7728aab41849,35,1,[],False,True,1,68D,4,1,0,cardinal_only
+a99fbf96-2a7f-434a-885b-243cdbc1e83b,35,1,[],False,False,0,57J,5,0,0,cardinal_only
+6b4eb0cd-0ec5-46e0-a920-0c80607735db,35,1,[],False,False,0,57K,5,0,0,cardinal_only
+d115d0e8-b14b-4aae-af26-6df52e6663f0,35,1,[],False,False,0,56D,5,0,0,cardinal_only
+f531ffa1-4bba-40ad-b14b-8b8bbe5a4603,35,1,[],False,False,0,56E,5,0,0,cardinal_only
+06451433-4e16-4395-89a1-6b87a345beed,35,1,[],False,False,0,56F,5,0,0,cardinal_only
+065de683-0198-4f2a-b823-c59d82ad40a1,35,1,[],False,False,0,56G,5,0,0,cardinal_only
+17d76f40-c4f6-41d3-9b01-849c51a55b59,35,1,[],False,False,0,56H,5,0,0,cardinal_only
+e724c863-281c-49e4-bbab-9e07065745bf,35,1,[],False,False,0,56J,5,0,0,cardinal_only
+8cf38231-d28f-49f8-b594-7ea325c4d615,35,1,[],False,False,0,56K,5,0,0,cardinal_only
+6e82fa16-ca4a-42c3-8578-ac5cb8fa5c6b,35,1,[],False,False,0,55D,5,0,0,cardinal_only
+2a10ff38-fd64-457f-a679-8a46f1dea601,35,1,[],False,False,0,55E,5,0,0,cardinal_only
+da1baf08-e8f2-49f0-b8d1-8fe9f929044b,34,1,[],True,False,1,68F,5,0,0,cardinal_only
+eacf6c67-8adc-4864-b6b2-d365804701b8,34,1,[],True,False,1,68H,5,0,0,cardinal_only
+9b84b3fc-4cb6-4e74-9ca1-26b8b5a1211d,34,1,[],False,False,0,55F,5,0,0,cardinal_only
+17309816-9840-4603-bd16-e1eb81058e8f,34,1,[],False,False,0,55G,5,0,0,cardinal_only
+97b55849-063a-4a8c-80c8-ad632b6cef6d,34,1,[],True,False,1,68J,5,0,0,cardinal_only
+7a82416b-d258-4eb5-b230-86f0abb63a96,34,1,[],False,False,0,55H,5,0,0,cardinal_only
+ca042275-e611-41e0-a732-4c07f4868a70,34,1,[],False,False,0,55J,5,0,0,cardinal_only
+243b7a07-af24-4052-a2c3-416e1c5f22fc,33,1,[],True,False,1,68K,5,0,0,cardinal_only
+4a40045d-8b10-4a49-be67-1acfe378d177,33,1,[],False,False,0,55K,5,0,0,cardinal_only
+5475d3ed-96d6-4804-8910-ab70287b0bca,33,1,[],False,False,0,54D,5,0,0,cardinal_only
+5bbf50dd-7f7f-41dc-a018-8e99f014bf5a,33,1,[],True,False,1,67D,5,0,0,cardinal_only
+3c1a078d-0762-44f2-a436-5548b395847d,33,1,[],False,False,0,54E,5,0,0,cardinal_only
+55b31edc-97d1-497b-9d51-c3add4b82eaf,33,1,[],False,False,0,54F,5,0,0,cardinal_only
+7fc7d1cc-2bba-4a68-9360-959d08ac1ffa,33,1,[],False,False,0,54G,5,0,0,cardinal_only
+1c951a3a-4490-44a2-a168-7562fd825373,33,1,[],True,False,1,67E,5,0,0,cardinal_only
+465cb21c-21af-4450-a971-3c2cfb2f18d1,33,1,[],True,False,1,67F,5,0,0,cardinal_only
+b4f17156-7443-4ec1-a59f-de9aacc94b17,32,1,[],True,False,1,67G,5,0,0,cardinal_only
+47968baf-5e0f-4f66-b7ac-04bab47f9ab6,32,1,[],False,False,0,54H,5,0,0,cardinal_only
+337b2a3b-8fea-4019-aa73-0938ca58d44f,32,1,[],False,False,0,54J,5,0,0,cardinal_only
+30dfb1ff-c6c7-4cf3-b367-85a984f866c2,32,1,[],False,False,0,54K,5,0,0,cardinal_only
+de80bbe0-a675-4564-8c64-ade91b747faf,32,1,[],True,False,1,67H,5,0,0,cardinal_only
+b2910cda-8918-451a-81ee-9dcfdbca9777,32,1,[],False,False,0,53D,5,0,0,cardinal_only
+38fc97b9-826f-4777-8b95-76668e7d4e18,32,1,[],False,False,0,53E,5,0,0,cardinal_only
+f9396bcb-1953-4008-b5ee-f9e853ba0afd,32,1,[],True,False,1,67J,5,0,0,cardinal_only
+e7b0ceeb-fcd1-4153-9f7e-785de4aa8924,32,1,[],True,False,1,67K,5,0,0,cardinal_only
+383308b1-4dbc-429b-8fa2-042ca29796de,31,1,[],False,False,0,53F,5,0,0,cardinal_only
+5c09b6a8-7383-4803-a172-2b01a2515f30,31,1,[],False,False,0,53G,5,0,0,cardinal_only
+48aac3a5-610a-41ef-bdb7-3b00ad766d5a,31,1,[],False,False,0,53H,5,0,0,cardinal_only
+7eb4ff14-cb5b-4710-b512-c721095a66fc,31,1,[],True,True,2,77H,3,1,1,cardinal_only
+f4293462-45c1-4728-bef1-c50c69fa5fb3,31,1,[],False,True,1,66C,4,1,0,cardinal_only
+7ef6cd3e-687a-4350-979a-17281a8d1ec1,31,1,[],False,False,0,53J,5,0,0,cardinal_only
+6de64610-d82b-48b6-a00d-27ffb366aec5,31,1,[],False,False,0,53K,5,0,0,cardinal_only
+0801483a-00e5-4189-ae88-3f69adb36f4d,31,1,[],False,False,0,52D,5,0,0,cardinal_only
+67da2b06-f61a-4a6b-b074-72570f4b00b4,31,1,[],True,False,1,66D,5,0,0,cardinal_only
+465ad002-1e49-43c5-8014-eefdc0b77711,30,1,[],True,False,1,66E,5,0,0,cardinal_only
+80b84741-5a28-4e38-b2d8-3967f75d9213,30,1,[],False,True,1,66G,4,1,0,cardinal_only
+bb91bbf0-1c81-4451-9e85-eac4504082a3,30,1,[],True,False,1,66H,5,0,0,cardinal_only
+cb756659-9073-417e-8081-b339ba9eb6ce,29,1,[],False,False,0,52E,5,0,0,cardinal_only
+3d0de077-2a5b-4f72-8ce9-9c0a8d0bab75,29,1,[],True,False,1,66J,5,0,0,cardinal_only
+8ea11026-f225-465f-af59-66880e995765,29,1,[],True,False,1,66K,5,0,0,cardinal_only
+ed56e014-d95f-4962-8774-83859d2e2877,29,1,[],False,False,0,52F,5,0,0,cardinal_only
+357f369a-e5c9-451a-be80-76e5e6cee53c,28,1,[],True,False,1,65C,5,0,0,cardinal_only
+1382cc62-f361-4f05-a35e-9d808872ab7a,28,1,[],False,True,1,65D,4,1,0,cardinal_only
+0eb0d5d5-ae27-4e81-a08c-89015715d523,28,1,[],False,False,0,52G,5,0,0,cardinal_only
+7f771d5a-e720-4065-8d4a-7b7268139467,28,1,[],True,False,1,65F,5,0,0,cardinal_only
+1df63a0a-37f2-4115-bace-542905a22b2c,28,1,[],False,True,1,65H,4,1,0,cardinal_only
+88e85a16-75e5-47c1-8d0a-b0ce3db69e33,28,1,[],False,False,0,52H,5,0,0,cardinal_only
+0a68d9b9-27a4-4d05-b4e5-a41cdd656fda,28,1,[],False,False,0,52J,5,0,0,cardinal_only
+1af590d0-11ea-4671-ac7e-3cce5a32961b,28,1,[],True,False,1,65G,5,0,0,cardinal_only
+cbe8efb1-cb78-4b9c-8ca7-91e8e0ae6b76,27,1,[],False,False,0,52K,5,0,0,cardinal_only
+2a630273-6075-4c4d-8d6a-8db4c30f1c4a,27,1,[],True,False,1,65K,5,0,0,cardinal_only
+53e0b180-d54c-480f-9ef4-92b135cb52f1,27,1,[],False,False,0,51D,5,0,0,cardinal_only
+fb1e734f-3cc3-4555-9480-0f4aca3ce007,26,1,[],True,False,1,64C,5,0,0,cardinal_only
+c10e181e-5f7a-4dda-857e-11c799f6afe3,26,1,[],True,False,1,64D,5,0,0,cardinal_only
+2ab872c1-1ea9-4d5e-917f-dad6d8df1432,26,1,[],True,False,1,64E,5,0,0,cardinal_only
+a23c6df9-6627-4586-bb9b-f098d10dad9b,26,1,[],True,False,1,64F,5,0,0,cardinal_only
+683e7cd1-a8d4-46ab-b3b1-3df8b51d6975,26,1,[],True,False,1,64G,5,0,0,cardinal_only
+6383587d-720b-49e1-adf6-063c86881dcb,26,1,[],False,True,1,64H,4,1,0,cardinal_only
+eece2f38-b0e3-4086-bbca-652e1174f524,26,1,[],True,False,1,64K,5,0,0,cardinal_only
+1ea41f77-3fe3-498e-b63b-6e8c37d9364e,25,1,[],False,False,0,51E,5,0,0,cardinal_only
+438ef6ee-c220-4398-a4ba-df6544e67225,25,1,[],True,False,1,63D,5,0,0,cardinal_only
+fda21417-db2c-4e8f-abc6-0f0a4effde01,25,1,[],False,False,0,51F,5,0,0,cardinal_only
+1362203f-1451-4ca8-8d67-fa2c597d6b90,24,1,[],False,False,0,51G,5,0,0,cardinal_only
+52306941-b056-4226-b317-60b01b1bab3f,24,1,[],True,True,2,77K,3,1,1,cardinal_only
+088751bb-621c-4e78-826d-9e598e22f2ab,24,1,[],True,False,1,63E,5,0,0,cardinal_only
+57b07779-6248-4587-af84-46fb93cc86e0,23,1,[],True,False,1,63F,5,0,0,cardinal_only
+e9a20196-9dd2-4ae7-87d6-6d335011a924,23,1,[],True,True,2,76J,3,1,1,cardinal_only
+3ca62e73-b38e-4644-bb5d-446e75269630,23,1,[],True,False,1,63G,5,0,0,cardinal_only
+9cb35f0e-fb35-4f85-8ff4-36cb67cad736,23,1,[],True,False,1,63H,5,0,0,cardinal_only
+f2a03b7e-dc5a-40b8-ad26-977d8ea130b1,23,1,[],True,False,1,63J,5,0,0,cardinal_only
+240e75ce-eef1-46d5-b957-166df3afa8b9,22,1,[],True,False,1,63K,5,0,0,cardinal_only
+9cfb5367-69b0-425d-a561-a686f474afd9,22,1,[],True,False,1,62C,5,0,0,cardinal_only
+2bf34faa-2a47-4839-a6b0-0c337ba8ead4,22,1,[],True,False,1,62D,5,0,0,cardinal_only
+036049b1-efd4-4e27-8720-d75773a20522,22,1,[],False,False,0,51H,5,0,0,cardinal_only
+6f9ac6ac-2772-45c0-b523-b6afbf9e1cda,22,1,[],True,False,1,62E,5,0,0,cardinal_only
+e218f334-8bfc-4451-bee6-913915e4ac27,21,1,[],True,False,1,62F,5,0,0,cardinal_only
+0465a45b-5eb9-436e-b195-2744d53a6dcf,21,1,[],False,False,0,51J,5,0,0,cardinal_only
+50d52850-4646-4614-889b-b984128540da,21,1,[],True,False,1,62G,5,0,0,cardinal_only
+bbe66e34-435d-48e3-91cd-bdfe4552f06e,21,1,[],False,False,0,51K,5,0,0,cardinal_only

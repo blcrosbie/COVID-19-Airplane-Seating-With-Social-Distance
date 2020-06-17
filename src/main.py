@@ -21,6 +21,8 @@
 
 import os, sys
 import json
+import time
+
 
 from randomize import create_passenger_roster
 
@@ -34,7 +36,7 @@ sys.path.append(LOCAL_MODELS_DIR)
 from airplane import Airplane
 from offset_analyze import AnalyzeSocialDistance
 from assign_seats import init_passenger_seating, group_AssignSeat, single_AssignSeat
-from find_seats import single_find_next_seat
+# from find_seats import single_find_next_seat
 # from assign_seats import SeatPassenger
 # from block_seats import SocialDistance
 
@@ -75,7 +77,25 @@ def initialize_airplane(debug=False, capacity=0.0, option=0):
             
         ### BUILD AIRPLANE
         plane = Airplane(airplane_choices[option])
-        capacity = plane.booked_seats/plane.total_seats
+        
+        # now enter a capacity:
+        attempts = 3
+        print("Set a value between 0-100 for capacity (%)")
+        capacity = None    
+        while capacity is None and attempts > 0:
+            capacity = input("Enter Value: ")
+            try:
+                assert isinstance(float(capacity), float), "\n NOT A VALID ENTRY. TRY AGAIN"
+                capacity = float(capacity)/100
+
+                
+            except Exception as e:
+                print(e)
+                capacity = None
+                attempts -= 1
+                print("\tRemaining Attempts: {}\n".format(attempts))
+        
+        
         plane.create_cabin(capacity)
         
     
@@ -88,35 +108,46 @@ def initialize_airplane(debug=False, capacity=0.0, option=0):
 def initialize_offsets(default_offset, debug=False):
     # global default offset for no social distancing
 
+#    
+#    if debug:
+#        no_offset = default_offset
+#        # Default Offset declared in globals as x: 0 y: 0, the conventional seating method
+#        # THIS COULD BE REDEFINED TO ALLOW CUSTOMIZATION: SET BY MAX X and Y from user
+#        offset_1 = {'x': 2, 'y': 1, 'method': 'full_block'}
+#        offset_2 = {'x': 2, 'y': 1, 'method': 'shaved_corners'}
+#        offset_3 = {'x': 1, 'y': 1, 'method': 'full_block'}
+#        offset_4 = {'x': 1, 'y': 1, 'method': 'cardinal_only'}
+#        offset_5 = {'x': 1, 'y': 0, 'method': 'cardinal_only'}
+#        
+#        sd_offsets = [no_offset, offset_1, offset_2, offset_3, offset_4, offset_5]
+#        
+#        
+#    else:
+#        ## ask user for MAX value X, Y
+#        ## iterate through decrement from max to 0, cycle through full-block, shaved-corners, cardinal-only
+#        ## once Y=0 and X=1 and cardinal only, finish list
+#        # no_default = set_default_offset
+#        # sd_offsets = [no_offset]
+#        pass
+#    
+    no_offset = default_offset
+    # Default Offset declared in globals as x: 0 y: 0, the conventional seating method
+    # THIS COULD BE REDEFINED TO ALLOW CUSTOMIZATION: SET BY MAX X and Y from user
+    offset_1 = {'x': 2, 'y': 1, 'method': 'full_block'}
+    offset_2 = {'x': 2, 'y': 1, 'method': 'shaved_corners'}
+    offset_3 = {'x': 1, 'y': 1, 'method': 'full_block'}
+    offset_4 = {'x': 1, 'y': 1, 'method': 'cardinal_only'}
+    offset_5 = {'x': 1, 'y': 0, 'method': 'cardinal_only'}
     
-    if debug:
-        no_offset = default_offset
-        # Default Offset declared in globals as x: 0 y: 0, the conventional seating method
-        # THIS COULD BE REDEFINED TO ALLOW CUSTOMIZATION: SET BY MAX X and Y from user
-        offset_1 = {'x': 2, 'y': 1, 'method': 'full_block'}
-        offset_2 = {'x': 2, 'y': 1, 'method': 'shaved_corners'}
-        offset_3 = {'x': 1, 'y': 1, 'method': 'full_block'}
-        offset_4 = {'x': 1, 'y': 1, 'method': 'cardinal_only'}
-        offset_5 = {'x': 1, 'y': 0, 'method': 'cardinal_only'}
-        
-        sd_offsets = [no_offset, offset_1, offset_2, offset_3, offset_4, offset_5]
-        
-        
-    else:
-        ## ask user for MAX value X, Y
-        ## iterate through decrement from max to 0, cycle through full-block, shaved-corners, cardinal-only
-        ## once Y=0 and X=1 and cardinal only, finish list
-        # no_default = set_default_offset
-        # sd_offsets = [no_offset]
-        pass
+    sd_offsets = [no_offset, offset_1, offset_2, offset_3, offset_4, offset_5]
     
 
     return sd_offsets
     
 
-def analyze_offsets(airplane, sd_offset_list, default_offset, view_charts=False, debug=False):
+def analyze_offsets(airplane, sd_offset_list, default_offset, view_charts=True, debug=False):
 
-    if os.path.exists('offset.json'):
+    if debug == False and os.path.exists('offset.json'):
         with open('offset.json', 'r') as fp:
             offsets_analyzed_dict = json.load(fp)
         
@@ -323,12 +354,14 @@ offset_info = {}
 if __name__ == '__main__':
     
     DEBUG = True
+#    DEBUG = False
     test_capacity = 0.66
-    age_threshold = 50
     test_option = 2
     
     # 1. BUILD PLANE
-    my_plane = initialize_airplane(debug=DEBUG, capacity=test_capacity, option=test_option)
+    my_plane = initialize_airplane(debug=False, capacity=test_capacity, option=test_option)
+    
+    start_time = time.time()
     
     # 2a. set the spacing offsets
     my_sd_offsets = initialize_offsets(default_offset, debug=DEBUG)
@@ -344,6 +377,11 @@ if __name__ == '__main__':
     
     # 5. Save CSV results
     save_results(passengers_df, my_plane, LOCAL_REPO_DIR)
+    
+    end_time = time.time()
+    
+    print("\n\nTOTAL RUN TIME: {}".format(end_time - start_time))
+    time.sleep(10)
     
 
 

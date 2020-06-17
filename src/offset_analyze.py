@@ -1,11 +1,19 @@
 # -*- coding: utf-8 -*-
 
+import os, sys
 import pandas as pd
 import matplotlib.pyplot as plt
 
 from assign_seats import SeatPassenger
 from block_seats import SocialDistance
 from find_seats import find_next_seat
+
+
+LOCAL_SRC_DIR = os.path.dirname(os.path.abspath(__file__))
+LOCAL_REPO_DIR = os.path.dirname(LOCAL_SRC_DIR)
+
+LOCAL_RESULTS_DIR = os.path.join(LOCAL_REPO_DIR, "results/offsets")
+sys.path.append(LOCAL_RESULTS_DIR)
 
 
 def calculate_max_accommodation(airplane, offsets, view_charts):
@@ -177,6 +185,8 @@ def calculate_buffer_ratio(airplane, offsets, offset_max_seats, view_charts):
         plt.ylabel("Accommodated passengers with Social Distancing")
         plt.legend(capacity_dict.keys())
         plt.title("Accommodation per Capacity")
+        plot_fn = os.path.join(LOCAL_RESULTS_DIR, (o_key + '.png'))
+        plt.savefig(plot_fn)
         
     
     return buffer_dict
